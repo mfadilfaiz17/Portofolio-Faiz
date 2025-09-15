@@ -1,0 +1,290 @@
+/* Reset Dasar & Pengaturan Global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #e6eef8;
+    line-height: 1.6;
+    scroll-behavior: smooth; /* Opsional: membuat navigasi lebih halus */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 80px 20px;
+}
+
+h1, h2, h3 {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* ----- Header & Navigasi ----- */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #007bff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo-icon img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #fffafa;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #0099ff;
+}
+
+/* ----- Bagian Home (Hero Section) ----- */
+#home.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: #000000;
+    padding-top: 80px;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.text-content {
+    flex: 1;
+}
+
+.designer-role {
+    font-size: 18px;
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.greeting {
+    font-size: 48px;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.name {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.origin {
+    font-size: 24px;
+    color: #aaa;
+    margin-top: 10px;
+}
+
+.image-content {
+    flex: 1;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.image-content img {
+    height: 500px;
+    width: auto;
+    filter: grayscale(100%);
+}
+
+/* ----- Bagian Profil, Portofolio & Logo ----- */
+#profile, #portofolio, #logo, #message {
+    text-align: center;
+}
+
+h1 span, h2 span {
+    color: #007bff;
+}
+
+#profile p {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.portfolio-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 40px;
+    align-items: center;
+}
+
+.portfolio-item {
+    text-align: center;
+    max-width: 600px;
+    display: flex; /* Menggunakan Flexbox untuk tata letak yang lebih baik */
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #1a1a1a;
+}
+
+.portfolio-item img {
+    /* Aturan baru untuk mengontrol ukuran gambar */
+    width: 100%;
+    height: auto;
+    max-height: 400px; /* Batasan tinggi maksimum agar tidak terlalu besar */
+    object-fit: contain; /* Memastikan gambar pas di dalam area tanpa terdistorsi */
+    margin-bottom: 15px;
+    border-radius: 8px; /* Menambahkan sudut melengkung pada gambar */
+}
+
+.portfolio-item h3 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.portfolio-item p {
+    font-size: 1em;
+    color: #b0b0b0;
+}
+
+/* ----- Bagian Logo Grid ----- */
+#logo {
+    background-color: #0d0d0d;
+}
+
+.logo-header h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.logo-grid-item {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 15px;
+}
+
+/* ----- Bagian Pesan ----- */
+#message form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+#message label {
+    text-align: left;
+    font-weight: bold;
+}
+
+#message input,
+#message textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #1a1a1a;
+    color: #fff;
+    resize: none;
+}
+
+#message button {
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#message button:hover {
+    background-color: #0056b3;
+}
+
+/* Media Queries untuk Responsif */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        padding: 10px;
+    }
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 10px;
+    }
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    .image-content {
+        justify-content: center;
+        align-items: center;
+    }
+    .image-content img {
+        height: 350px;
+    }
+    .portfolio-container {
+        gap: 30px;
+    }
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
