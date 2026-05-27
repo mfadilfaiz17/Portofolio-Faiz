@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(typeEffect, typeSpeed);
     }
 
-    setTimeout(typeEffect, 1500);
+    setTimeout(typeEffect, 1200);
     
     // ==========================================
     // 1. PRE-LOADER & AOS INITIALIZATION LOGIC
@@ -93,14 +93,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 3. FITUR FORM SUBMIT CONTACT
     // ==========================================
-    const contactForm = document.getElementById('contact-form');
+    /*const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             alert("Pesan berhasil dikirim! Faiz akan segera membalasnya.");
             contactForm.reset();
         });
-    }
+    }*/
 
     // ==========================================
     // 4. ZORA AGENT CHATBOT LOGIC
@@ -122,38 +122,51 @@ document.addEventListener("DOMContentLoaded", () => {
     let hasMoved = false; 
     let startX, startY, initialLeft, initialTop;
 
+    function getEventCoords(e) {
+        if (e.touches && e.touches.length > 0) {
+            return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+        return { x: e.clientX, y: e.clientY };
+    }
+
     function startDrag(e) {
-        if (e.button !== 0) return; 
+        if (e.type === 'mousedown' && e.button !== 0) return;
         if (e.target.closest('#zora-close') || e.target.closest('#zora-input') || e.target.closest('#zora-send') || e.target.closest('.zora-suggestions')) return;
 
-        e.preventDefault(); 
+        // Hanya preventDefault untuk mouse, BUKAN touch agar click tetap jalan di mobile
+        if (e.type === 'mousedown') e.preventDefault();
+
         isDragging = true;
         hasMoved = false;
 
+        const coords = getEventCoords(e);
         const rect = zoraWrapper.getBoundingClientRect();
         zoraWrapper.style.bottom = 'auto';
         zoraWrapper.style.right = 'auto';
         zoraWrapper.style.left = rect.left + 'px';
         zoraWrapper.style.top = rect.top + 'px';
 
-        startX = e.clientX;
-        startY = e.clientY;
+        startX = coords.x;
+        startY = coords.y;
         initialLeft = rect.left;
         initialTop = rect.top;
     }
 
-    zoraTrigger.addEventListener('mousedown', startDrag);
-    zoraHeader.addEventListener('mousedown', startDrag);
-
-    document.addEventListener('mousemove', (e) => {
+    function onDragMove(e) {
         if (!isDragging) return;
 
-        const deltaX = e.clientX - startX;
-        const deltaY = e.clientY - startY;
+        // Cegah scroll halaman hanya saat benar-benar sedang drag
+        if (hasMoved && e.cancelable) e.preventDefault();
 
-        if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+        const coords = getEventCoords(e);
+        const deltaX = coords.x - startX;
+        const deltaY = coords.y - startY;
+
+        if (Math.abs(deltaX) > 8 || Math.abs(deltaY) > 8) {
             hasMoved = true;
         }
+
+        if (!hasMoved) return; // Jangan gerakkan sebelum threshold
 
         let newLeft = initialLeft + deltaX;
         let newTop = initialTop + deltaY;
@@ -179,25 +192,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
         zoraWrapper.style.left = newLeft + 'px';
         zoraWrapper.style.top = newTop + 'px';
-    });
+    }
 
-    document.addEventListener('mouseup', () => { isDragging = false; });
+    function onDragEnd(e) {
+        if (!isDragging) return;
+        isDragging = false;
 
-    zoraTrigger.addEventListener('click', () => {
-        if (hasMoved) return; 
-        
+        // Kalau touch dan tidak gerak = tap → buka/tutup chat
+        if (e.type === 'touchend' && !hasMoved) {
+            const isTrigger = e.target.closest('#zora-trigger');
+            const isClose  = e.target.closest('#zora-close');
+
+            if (isClose) {
+                zoraChatbot.classList.remove('active');
+                zoraTrigger.style.visibility = 'visible';
+                zoraTrigger.style.pointerEvents = 'auto';
+            } else if (isTrigger && !zoraChatbot.classList.contains('active')) {
+                openZoraChat();
+            }
+        }
+    }
+
+    function openZoraChat() {
         const wrapperRect = zoraWrapper.getBoundingClientRect();
         const chatW = 350;
         const chatH = 430;
         const screenW = window.innerWidth;
         const screenH = window.innerHeight;
-        
+
         let safeTop = wrapperRect.top;
         let safeLeft = wrapperRect.left;
 
         const expectedTop = wrapperRect.bottom - 70 - chatH;
-        if (expectedTop < 15) safeTop += Math.abs(expectedTop) + 20; 
-        
+        if (expectedTop < 15) safeTop += Math.abs(expectedTop) + 20;
+
         const expectedBottom = wrapperRect.bottom;
         if (expectedBottom > screenH - 15) safeTop -= (expectedBottom - screenH) + 20;
 
@@ -205,8 +233,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const expectedLeft = iconCenter - (chatW / 2);
         const expectedRight = iconCenter + (chatW / 2);
 
-        if (expectedLeft < 15) safeLeft += Math.abs(expectedLeft) + 20; 
-        else if (expectedRight > screenW - 15) safeLeft -= (expectedRight - screenW) + 20; 
+        if (expectedLeft < 15) safeLeft += Math.abs(expectedLeft) + 20;
+        else if (expectedRight > screenW - 15) safeLeft -= (expectedRight - screenW) + 20;
 
         zoraWrapper.style.top = safeTop + 'px';
         zoraWrapper.style.left = safeLeft + 'px';
@@ -214,6 +242,24 @@ document.addEventListener("DOMContentLoaded", () => {
         zoraChatbot.classList.add('active');
         zoraTrigger.style.visibility = 'hidden';
         zoraTrigger.style.pointerEvents = 'none';
+    }
+
+    // Mouse events
+    zoraTrigger.addEventListener('mousedown', startDrag);
+    zoraHeader.addEventListener('mousedown', startDrag);
+    document.addEventListener('mousemove', onDragMove);
+    document.addEventListener('mouseup', onDragEnd);
+
+    // Touch events untuk mobile (passive: true agar tidak blokir scroll/click)
+    zoraTrigger.addEventListener('touchstart', startDrag, { passive: true });
+    zoraHeader.addEventListener('touchstart', startDrag, { passive: true });
+    document.addEventListener('touchmove', onDragMove, { passive: false });
+    document.addEventListener('touchend', onDragEnd);
+
+    // Click handler untuk desktop (mouse). Di mobile ditangani oleh touchend di onDragEnd
+    zoraTrigger.addEventListener('click', () => {
+        if (hasMoved) return;
+        openZoraChat();
     });
 
     zoraClose.addEventListener('click', (e) => {
@@ -235,18 +281,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function botResponse(input) {
         const text = input.toLowerCase();
-        let reply = "Maaf, Zora belum dilatih untuk pertanyaan itu. Silakan hubungi Faiz lewat form 'Contact'.";
+        let replyKey = "zora_reply_default";
 
-        if (text.includes("halo") || text.includes("hai") || text.includes("proyek") || text.includes("terbaik")) {
-            reply = "Proyek terbaik Faiz di antaranya adalah AI Productivity & Automation Tool yang dibangun dengan FastAPI & SvelteKit, serta Medical CNN Classifier (akurasi 93%)!";
-        } else if (text.includes("skill") || text.includes("kemampuan") || text.includes("utama")) {
-            reply = "Faiz menguasai Web Backend (FastAPI, Node.js), Data Science & AI (Python, TensorFlow/CNN), serta IoT Hardware menggunakan ESP32.";
-        } else if (text.includes("cv") || text.includes("resume") || text.includes("ats")) {
-            reply = "Kamu bisa mengunduh ATS CV terbaru berformat PDF milik Faiz dengan menekan tombol 'Download CV' di navigasi bar atas.";
-        } else if (text.includes("kontak") || text.includes("hubungi") || text.includes("cara")) {
-            reply = "Kamu bisa menghubungi Faiz secara langsung lewat form di halaman 'Contact' atau klik langsung tombol EMAIL di sisi kiri bawah.";
-        } else if (text.includes("hobi")) {
-            reply = "Di luar coding, Faiz aktif sebagai drummer musik dan juga gemar bermain turnamen futsal bersama tim.";
+        // Tambahkan keyword bahasa Inggris agar Zora paham keduanya
+        if (text.includes("halo") || text.includes("hai") || text.includes("hello") || text.includes("hi") || text.includes("proyek") || text.includes("project") || text.includes("terbaik") || text.includes("best")) {
+            replyKey = "zora_reply_projects";
+        } else if (text.includes("skill") || text.includes("kemampuan") || text.includes("utama") || text.includes("core")) {
+            replyKey = "zora_reply_skills";
+        } else if (text.includes("cv") || text.includes("resume") || text.includes("ats") || text.includes("download")) {
+            replyKey = "zora_reply_cv";
+        } else if (text.includes("kontak") || text.includes("hubungi") || text.includes("cara") || text.includes("contact") || text.includes("how to")) {
+            replyKey = "zora_reply_contact";
+        } else if (text.includes("hobi") || text.includes("hobby") || text.includes("hobbies")) {
+            replyKey = "zora_reply_hobbies";
         }
 
         zoraLoading.classList.remove('hidden');
@@ -254,7 +301,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
             zoraLoading.classList.add('hidden');
-            addMessage('bot', reply);
+            // Zora sekarang menjawab berdasarkan bahasa yang aktif di website
+            addMessage('bot', translations[currentLang][replyKey]);
         }, 1500);
     }
 
@@ -288,37 +336,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const projectsData = {
         "ai-tool": { 
             title: "Analisis Sentimen Roblox Web",
-            images: ["../image/ai-roblox.jpg"], 
+            images: ["image/robloxweb.png","image/robloxweb2.png","image/robloxweb3.png","image/robloxweb4.png"], 
             desc: "Membangun model Natural Language Processing (NLP) untuk menganalisis sentimen dari ulasan aplikasi Roblox di Google Playstore secara otomatis.",
             github: "https://github.com/mfadilfaiz17"
         },
         "cnn-medis": { 
             title: "Klasifikasi Penyakit Ginjal (CNN)",
-            images: ["../image/cnn.jpg"], 
+            images: ["image/cnnGinjal.png","image/cnnGinjal2.png","image/cnnGinjal3.png","image/cnnGinjal4.png"], 
             desc: "Mengembangkan model AI arsitektur CNN dengan 32 neuron konvolusi. Sistem ini digunakan untuk mengklasifikasikan penyakit ginjal berdasarkan citra hasil CT Scan dengan tingkat akurasi tinggi.",
             github: "https://github.com/mfadilfaiz17"
         },
-        "robot-soccer": { 
-            title: "Robot Soccer Controllers",
-            images: ["../image/robot.jpg"], 
-            desc: "Riset bersama tim UKM Robotika Polindra. Proyek ini membangun robot sepak bola tangkas menggunakan mikrokontroler ESP32 dan dikontrol melalui sistem nirkabel.",
+        "designsportfo": { 
+            title: "SportFo",
+            images: ["image/sportFo.png","image/sportFo2.png","image/sportFo3.png","image/sportFo4.png"], 
+            desc: "Sebuah aplikasi ramah pengguna booking arena olahraga yang ada disekitarmu. Praktis, simpel dan mudah digunakan dari rumahmu.",
             github: "https://github.com/mfadilfaiz17"
         },
         "jdm-car": { 
             title: "JDM Car Sell",
-            images: ["../image/jdm.jpg"], 
+            images: ["image/jdm.png","image/jdm2.png","image/jdm3.png","image/jdm4.png","image/jdm5.png"], 
             desc: "Membangun sistem otomotif untuk manajemen jual beli mobil Japanese Domestic Market (JDM) seperti Nissan Silvia S15, Skyline R34, dan Mazda RX-7.",
             github: "https://github.com/mfadilfaiz17"
         },
         "kalkulator-matrix": { 
-            title: "Kalkulator Matrix Web",
-            images: ["../image/kalkulator.jpg"], 
+            title: "The Matrix",
+            images: ["image/matrixweb.png","image/matrixweb2.png","image/matrixweb3.png","image/matrixweb4.png","image/matrixweb5.png"], 
             desc: "Membuat antarmuka sistem web interaktif untuk melakukan operasi perhitungan matriks aljabar linear yang kompleks dengan mudah dan cepat.",
-            github: "https://github.com/mfadilfaiz17i"
+            github: "https://github.com/mfadilfaiz17"
         },
         "summa-ai": { 
             title: "SummaAI",
-            images: ["../image/summa.jpg"], 
+            images: ["image/summaai.png","image/summaai2.png","image/summaai3.png"], 
             desc: "Website cerdas dengan fitur meringkas isi dokumen secara otomatis serta mengekstrak poin tindakan penting untuk kebutuhan produktivitas.",
             github: "https://github.com/m-fadil-faiz/summa-ai"
         }
@@ -390,71 +438,93 @@ document.addEventListener("DOMContentLoaded", () => {
         function updateModalImage() {
             if (currentImages && currentImages.length > 0 && modalImg) {
                 modalImg.src = currentImages[currentImageIndex];
+                
                 if (sliderCounter) {
                     sliderCounter.textContent = `${currentImageIndex + 1} / ${currentImages.length}`;
+                }
+
+                // KONTROL OTOMATIS PANAH MENTOK (Sembunyikan panah yang tidak diperlukan)
+                if (currentImages.length <= 1) {
+                    if (slideNext) slideNext.style.display = 'none';
+                    if (slidePrev) slidePrev.style.display = 'none';
+                } else {
+                    if (slidePrev) {
+                        // Jika di foto pertama (0), sembunyikan panah kiri. Jika tidak, munculkan.
+                        slidePrev.style.display = (currentImageIndex === 0) ? 'none' : 'flex';
+                    }
+                    if (slideNext) {
+                        // Jika di foto terakhir, sembunyikan panah kanan. Jika tidak, munculkan.
+                        slideNext.style.display = (currentImageIndex === currentImages.length - 1) ? 'none' : 'flex';
+                    }
                 }
             }
         }
 
-        // FIX: Blok kode tumpang tindih sudah dirapikan menjadi satu logika if-else yang bersih
         clickableCards.forEach(card => {
             card.addEventListener('click', () => {
                 const projectId = card.getAttribute('data-project-id');
                 const data = projectsData[projectId];
 
                 if (data) {
-                    if (modalTitle) modalTitle.textContent = data.title;
-                    if (modalDesc) modalDesc.textContent = data.desc;
+                    // Menyuntikkan data-i18n secara dinamis agar modal bisa ganti bahasa kapan saja
+                    if (modalTitle) {
+                        const titleKey = `modal_${projectId.replace(/-/g, '_')}_title`;
+                        modalTitle.setAttribute('data-i18n', titleKey);
+                        modalTitle.innerHTML = translations[currentLang][titleKey] || data.title;
+                    }
+                    if (modalDesc) {
+                        const descKey = `modal_${projectId.replace(/-/g, '_')}_desc`;
+                        modalDesc.setAttribute('data-i18n', descKey);
+                        modalDesc.innerHTML = translations[currentLang][descKey] || data.desc;
+                    }
+
                     currentImages = data.images || [];
                     
-                    // Logika tombol GitHub
                     if (modalGithub) {
                         if (data.github && data.github !== "#") {
-                            modalGithub.style.display = "inline-block";
+                            modalGithub.style.display = "inline-flex";
                             modalGithub.href = data.github;
                         } else {
                             modalGithub.style.display = "none";
                         }
                     }
                 } else {
-                    if (modalTitle) modalTitle.textContent = card.querySelector('h3').textContent;
-                    if (modalDesc) modalDesc.textContent = card.querySelector('p').textContent;
-                    currentImages = [card.querySelector('img').src];
-                    
-                    // Sembunyikan tombol GitHub jika tidak ada data dari JS
-                    if (modalGithub) {
-                        modalGithub.style.display = "none";
+                    // Fallback aman jika data tidak ada
+                    if (modalTitle) {
+                        modalTitle.removeAttribute('data-i18n');
+                        modalTitle.textContent = card.querySelector('h3').textContent;
                     }
+                    if (modalDesc) {
+                        modalDesc.removeAttribute('data-i18n');
+                        modalDesc.textContent = card.querySelector('p').textContent;
+                    }
+                    currentImages = [card.querySelector('img').src];
+                    if (modalGithub) modalGithub.style.display = "none";
                 }
 
                 currentImageIndex = 0; 
                 updateModalImage();
-
-                if (currentImages.length <= 1) {
-                    if (slideNext) slideNext.style.display = 'none';
-                    if (slidePrev) slidePrev.style.display = 'none';
-                } else {
-                    if (slideNext) slideNext.style.display = 'block';
-                    if (slidePrev) slidePrev.style.display = 'block';
-                }
-
                 projectModal.classList.remove('hidden');
             });
         });
 
+        // Tombol Slider Kanan (Next) - FIX MENTOK
         if (slideNext) {
             slideNext.addEventListener('click', () => {
-                currentImageIndex++;
-                if (currentImageIndex >= currentImages.length) currentImageIndex = 0; 
-                updateModalImage();
+                if (currentImageIndex < currentImages.length - 1) {
+                    currentImageIndex++;
+                    updateModalImage();
+                }
             });
         }
 
+        // Tombol Slider Kiri (Prev) - FIX MENTOK
         if (slidePrev) {
             slidePrev.addEventListener('click', () => {
-                currentImageIndex--;
-                if (currentImageIndex < 0) currentImageIndex = currentImages.length - 1; 
-                updateModalImage();
+                if (currentImageIndex > 0) {
+                    currentImageIndex--;
+                    updateModalImage();
+                }
             });
         }
 
@@ -523,7 +593,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "port_title": "Portfolio", "filter_all": "All", "filter_others": "Others (Activities)",
             "port_1_title": "Roblox Web Sentiment Analysis", "port_1_desc": "Building a Natural Language Processing model for sentiment analysis of Roblox app reviews on Playstore.",
             "port_2_title": "Kidney Disease Classification (CNN)", "port_2_desc": "Developing an AI CNN architecture model with 32 convolution neurons to classify kidney diseases based on CT SCAN results.",
-            "port_3_title": "Robot Soccer Controllers", "port_3_desc": "RPI Robotics Team research, building a soccer robot using ESP32 microcontroller.",
+            "port_3_title": "SportFo","port_3_desc": "A user-friendly application for booking sports arenas near you.",
             "port_4_title": "JDM Car Sell", "port_4_desc": "Building an automotive system for buying and selling Japanese Domestic Market (JDM) cars.",
             "port_5_title": "Web Matrix Calculator", "port_5_desc": "Creating an interactive matrix calculation system built into a calculator interface.",
             "port_6_title": "SummaAI", "port_6_desc": "A smart website with an automatic document summarization and action item extraction system.",
@@ -548,7 +618,29 @@ document.addEventListener("DOMContentLoaded", () => {
             "zora_msg_1": "Hello! I'm Zora. How can I help you with Faiz's CV, ML/DL skills, or portfolio?",
             "zora_sug_1": "Best projects?", "zora_sug_2": "How to contact?", "zora_sug_3": "Core skills?", 
             "zora_sug_4": "Faiz's hobbies?", "zora_sug_5": "Download ATS CV?",
-            "zora_ph": "Type a question..."
+            "zora_ph": "Type a question...",
+
+            // Modal Portfolio Details (Dari projectsData)
+            "modal_ai_tool_title": "Roblox Web Sentiment Analysis",
+            "modal_ai_tool_desc": "Building a Natural Language Processing (NLP) model to automatically analyze the sentiment of Roblox app reviews on Google Playstore.",
+            "modal_cnn_medis_title": "Kidney Disease Classification (CNN)",
+            "modal_cnn_medis_desc": "Developing an AI CNN architecture model with 32 convolution neurons. This system is used to classify kidney diseases based on CT Scan images with high accuracy.",
+            "modal_designsportfo_title": "SportFo",
+            "modal_designsportfo_desc": "A user-friendly application for booking sports arenas near you. Practical, simple, and easy to use from your home.",
+            "modal_jdm_car_title": "JDM Car Sell",
+            "modal_jdm_car_desc": "Building an automotive system for managing the buying and selling of Japanese Domestic Market (JDM) cars like Nissan Silvia S15, Skyline R34, and Mazda RX-7.",
+            "modal_kalkulator_matrix_title": "The Matrix",
+            "modal_kalkulator_matrix_desc": "Creating an interactive web system interface to perform complex linear algebra matrix calculations easily and quickly.",
+            "modal_summa_ai_title": "SummaAI",
+            "modal_summa_ai_desc": "A smart website featuring automatic document summarization and extraction of important action items for productivity needs.",
+
+            // Zora Bot Replies Dynamic
+            "zora_reply_default": "Sorry, Zora hasn't been trained for that question yet. Please contact Faiz via the 'Contact' form.",
+            "zora_reply_projects": "Faiz's best projects include the AI Productivity & Automation Tool built with FastAPI & SvelteKit, and a Medical CNN Classifier (93% accuracy)!",
+            "zora_reply_skills": "Faiz masters Web Backend (FastAPI, Node.js), Data Science & AI (Python, TensorFlow/CNN), and IoT Hardware using ESP32.",
+            "zora_reply_cv": "You can download Faiz's latest ATS CV in PDF format by clicking the 'Download CV' button on the top navigation bar.",
+            "zora_reply_contact": "You can contact Faiz directly via the form on the 'Contact' page or by clicking the EMAIL button at the bottom left.",
+            "zora_reply_hobbies": "Outside of coding, Faiz is active as a drummer and enjoys playing in futsal tournaments with his team."
         },
         "id": {
             // Navbar
@@ -572,7 +664,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "port_title": "Portofolio", "filter_all": "Semua", "filter_others": "Lainnya (Aktivitas)",
             "port_1_title": "Analisis Sentimen Roblox Web", "port_1_desc": "Membangun model Natural Language Processing untuk analisis sentimen penilaian aplikasi Roblox pada Playstore.",
             "port_2_title": "Klasifikasi Penyakit Ginjal (CNN)", "port_2_desc": "Mengembangkan model AI arsitektur CNN dengan 32 neuron konvolusi untuk klasifikasi penyakit ginjal berdasarkan hasil CT SCAN.",
-            "port_3_title": "Kontroler Robot Soccer", "port_3_desc": "Riset Tim Robotika RPI, membangun robot sepak bola menggunakan mikrokontroler ESP32.",
+            "port_3_title": "SportFo","port_3_desc": "Aplikasi yang mudah digunakan untuk memesan lapangan olahraga di sekitarmu.",
             "port_4_title": "Jual Beli Mobil JDM", "port_4_desc": "Membangun sistem otomotif jual beli mobil Japanese Domestic Market (JDM).",
             "port_5_title": "Kalkulator Matriks Web", "port_5_desc": "Membuat sistem perhitungan matriks yang diintegrasikan pada antarmuka kalkulator.",
             "port_6_title": "SummaAI", "port_6_desc": "Website cerdas dengan sistem peringkas isi dokumen secara otomatis serta penarikan poin tindakan.",
@@ -597,7 +689,29 @@ document.addEventListener("DOMContentLoaded", () => {
             "zora_msg_1": "Halo! Saya Zora. Ada yang bisa saya bantu terkait CV, keahlian ML/DL, atau portofolio Faiz?",
             "zora_sug_1": "Proyek terbaik?", "zora_sug_2": "Cara kontak?", "zora_sug_3": "Keahlian utama?", 
             "zora_sug_4": "Hobi Faiz?", "zora_sug_5": "Unduh CV ATS?",
-            "zora_ph": "Ketik pertanyaan..."
+            "zora_ph": "Ketik pertanyaan...",
+
+            // Modal Portfolio Details (Dari projectsData)
+            "modal_ai_tool_title": "Analisis Sentimen Roblox Web",
+            "modal_ai_tool_desc": "Membangun model Natural Language Processing (NLP) untuk menganalisis sentimen dari ulasan aplikasi Roblox di Google Playstore secara otomatis.",
+            "modal_cnn_medis_title": "Klasifikasi Penyakit Ginjal (CNN)",
+            "modal_cnn_medis_desc": "Mengembangkan model AI arsitektur CNN dengan 32 neuron konvolusi. Sistem ini digunakan untuk mengklasifikasikan penyakit ginjal berdasarkan citra hasil CT Scan dengan tingkat akurasi tinggi.",
+            "modal_designsportfo_title": "SportFo",
+            "modal_designsportfo_desc": "Sebuah aplikasi ramah pengguna booking arena olahraga yang ada disekitarmu. Praktis, simpel dan mudah digunakan dari rumahmu.",
+            "modal_jdm_car_title": "JDM Car Sell",
+            "modal_jdm_car_desc": "Membangun sistem otomotif untuk manajemen jual beli mobil Japanese Domestic Market (JDM) seperti Nissan Silvia S15, Skyline R34, dan Mazda RX-7.",
+            "modal_kalkulator_matrix_title": "The Matrix",
+            "modal_kalkulator_matrix_desc": "Membuat antarmuka sistem web interaktif untuk melakukan operasi perhitungan matriks aljabar linear yang kompleks dengan mudah dan cepat.",
+            "modal_summa_ai_title": "SummaAI",
+            "modal_summa_ai_desc": "Website cerdas dengan fitur meringkas isi dokumen secara otomatis serta mengekstrak poin tindakan penting untuk kebutuhan produktivitas.",
+
+            // Zora Bot Replies Dynamic
+            "zora_reply_default": "Maaf, Zora belum dilatih untuk pertanyaan itu. Silakan hubungi Faiz lewat form 'Contact'.",
+            "zora_reply_projects": "Proyek terbaik Faiz di antaranya adalah AI Productivity & Automation Tool yang dibangun dengan FastAPI & SvelteKit, serta Medical CNN Classifier (akurasi 93%)!",
+            "zora_reply_skills": "Faiz menguasai Web Backend (FastAPI, Node.js), Data Science & AI (Python, TensorFlow/CNN), serta IoT Hardware menggunakan ESP32.",
+            "zora_reply_cv": "Kamu bisa mengunduh ATS CV terbaru berformat PDF milik Faiz dengan menekan tombol 'Download CV' di navigasi bar atas.",
+            "zora_reply_contact": "Kamu bisa menghubungi Faiz secara langsung lewat form di halaman 'Contact' atau klik langsung tombol EMAIL di sisi kiri bawah.",
+            "zora_reply_hobbies": "Di luar coding, Faiz aktif sebagai drummer musik dan juga gemar bermain turnamen futsal bersama tim."
         }
     };
     

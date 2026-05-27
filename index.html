@@ -80,8 +80,8 @@
 
                         <h1 class="greeting">
                             <span data-i18n="hero_greeting" style="color: inherit; text-decoration: none;">Hi,
-                                I'm</span>
-                            <span class="name" id="typing-text"></span><span class="typing-cursor">|</span>
+                                I'm</span>&nbsp;
+                            <span class="name" id="typing-text">
                         </h1>
 
                         <p class="origin" data-i18n="hero_desc">Crafting reliable web applications powered by practical
@@ -142,19 +142,32 @@
 
         <section id="profile">
             <div class="container">
-                <h1 data-aos="fade-right"><span data-i18n="about_title_1" style="text-decoration: none;">About</span>
-                    <span data-i18n="about_title_2">Me</span></h1>
-                <div class="profile-card" data-aos="zoom-in">
-                    <p>
-                        <span data-i18n="about_p1">I am a Computer Engineering Technology student at Indramayu State
-                            Polytechnic, deeply invested in software engineering and practical Artificial Intelligence.
-                            My academic foundation aligns closely with my technical expertise, allowing me to build
-                            robust backend architectures and research robotics.</span>
-                        <br><br>
-                        <span data-i18n="about_p2">My primary focus lies in developing full-stack web applications that
-                            serve as interactive environments to deploy and test intelligent machine learning models,
-                            creating smarter user experiences.</span>
-                    </p>
+                <h1 data-aos="fade-right">
+                    <span data-i18n="about_title_1" style="text-decoration: none;">About</span>
+                    <span data-i18n="about_title_2">Me</span>
+                </h1>
+
+                <div class="about-bento-grid" data-aos="zoom-in">
+                    <div class="bento-box box-yellow">
+                        <h3><i class="fa-solid fa-terminal brutal-icon"></i> <span data-i18n="about_subtitle_1">Who Am
+                                I?</span></h3>
+                        <p>
+                            <span data-i18n="about_p1">I am a Computer Engineering Technology student at Indramayu State
+                                Polytechnic, deeply invested in software engineering and practical Artificial
+                                Intelligence. My academic foundation aligns closely with my technical expertise,
+                                allowing me to build robust backend architectures and research robotics.</span>
+                        </p>
+                    </div>
+
+                    <div class="bento-box box-blue">
+                        <h3><i class="fa-solid fa-microchip brutal-icon"></i> <span data-i18n="about_subtitle_2">Tech
+                                Focus</span></h3>
+                        <p>
+                            <span data-i18n="about_p2">My primary focus lies in developing full-stack web applications
+                                that serve as interactive environments to deploy and test intelligent machine learning
+                                models, creating smarter user experiences.</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -176,7 +189,7 @@
                 <div class="portfolio-grid-layout">
                     <div class="port-card clickable-card" data-category="ai" data-project-id="ai-tool"
                         data-aos="fade-up" data-aos-delay="0">
-                        <img src="image/ai-roblox.jpg" alt="Web Preview" class="port-img">
+                        <img src="image/robloxweb.png" alt="Web Preview" class="port-img">
                         <div class="port-content">
                             <div class="port-tag web-tag">ML & DL</div>
                             <h3 data-i18n="port_1_title">Roblox Web Sentiment Analysis</h3>
@@ -187,7 +200,7 @@
 
                     <div class="port-card clickable-card" data-category="ai" data-project-id="cnn-medis"
                         data-aos="fade-up" data-aos-delay="100">
-                        <img src="image/cnn.jpg" alt="Web Preview" class="port-img">
+                        <img src="image/cnnGinjal.png" alt="Web Preview" class="port-img">
                         <div class="port-content">
                             <div class="port-tag ai-tag">ML & DL</div>
                             <h3 data-i18n="port_2_title">Kidney Disease Classification (CNN)</h3>
@@ -196,22 +209,22 @@
                         </div>
                     </div>
 
-                    <div class="port-card clickable-card" data-category="iot" data-project-id="robot-soccer"
+                    <div class="port-card clickable-card" data-category="design" data-project-id="designsportfo"
                         data-aos="fade-up" data-aos-delay="200">
-                        <img src="image/robot.jpg" alt="Web Preview" class="port-img">
+                        <img src="image/sportFo.png" alt="Web Preview" class="port-img">
                         <div class="port-content">
-                            <div class="port-tag iot-tag">IoT / Hardware</div>
-                            <h3 data-i18n="port_3_title">Robot Soccer Controllers</h3>
-                            <p data-i18n="port_3_desc">RPI Robotics Team research, building a soccer robot using ESP32
-                                microcontroller.</p>
+                            <div class="port-tag design-tag">Design UI/UX</div>
+                            <h3 data-i18n="port_3_title">SportFo</h3>
+                            <p data-i18n="port_3_desc">A user-friendly application for booking sports arenas near you.
+                            </p>
                         </div>
                     </div>
 
                     <div class="port-card clickable-card" data-category="web" data-project-id="jdm-car"
                         data-aos="fade-up" data-aos-delay="0">
-                        <img src="image/jdm.jpg" alt="Web Preview" class="port-img">
+                        <img src="image/jdm.png" alt="Web Preview" class="port-img">
                         <div class="port-content">
-                            <div class="port-tag ai-tag">Web & Mobile</div>
+                            <div class="port-tag web-tag">Web & Mobile</div>
                             <h3 data-i18n="port_4_title">JDM Car Sell</h3>
                             <p data-i18n="port_4_desc">Building an automotive system for buying and selling Japanese
                                 Domestic Market (JDM) cars.</p>
@@ -220,18 +233,18 @@
 
                     <div class="port-card clickable-card" data-category="web" data-project-id="kalkulator-matrix"
                         data-aos="fade-up" data-aos-delay="100">
-                        <img src="image/kalkulator.jpg" alt="Web Preview" class="port-img">
+                        <img src="image/matrixweb.png" alt="Web Preview" class="port-img">
                         <div class="port-content">
                             <div class="port-tag ai-tag">Web & Mobile</div>
                             <h3 data-i18n="port_5_title">Web Matrix Calculator</h3>
                             <p data-i18n="port_5_desc">Creating an interactive matrix calculation system built into a
-                                calculator interface.</p>
+                                calculator interface and full step.</p>
                         </div>
                     </div>
 
                     <div class="port-card clickable-card" data-category="ai" data-project-id="summa-ai"
                         data-aos="fade-up" data-aos-delay="200">
-                        <img src="image/summa.jpg" alt="Web Preview" class="port-img">
+                        <img src="image/summaai.png" alt="Web Preview" class="port-img">
                         <div class="port-content">
                             <div class="port-tag web-tag">ML & DL</div>
                             <h3 data-i18n="port_6_title">SummaAI</h3>
@@ -250,21 +263,11 @@
                             data-i18n="cert_title_2">Achievements</span></h2>
                 </div>
                 <div class="cert-grid" data-aos="fade-up">
-                    <div class="cert-item bg-pastel-yellow"><img
-                            src="https://images.unsplash.com/photo-1523800503107-5bc3ba2a6f81?q=80&w=800&auto=format&fit=crop"
-                            alt="Certificate 1"></div>
-                    <div class="cert-item bg-pastel-blue"><img
-                            src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop"
-                            alt="Certificate 2"></div>
-                    <div class="cert-item bg-pastel-green"><img
-                            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop"
-                            alt="Certificate 3"></div>
-                    <div class="cert-item bg-pastel-pink"><img
-                            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop"
-                            alt="Certificate 4"></div>
-                    <div class="cert-item bg-pastel-purple"><img
-                            src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop"
-                            alt="Certificate 5"></div>
+                    <div class="cert-item bg-pastel-yellow"><img src="image/aiethic.png" alt="Certificate 1"></div>
+                    <div class="cert-item bg-pastel-blue"><img src="image/sertifpython.png" alt="Certificate 2"></div>
+                    <div class="cert-item bg-pastel-green"><img src="image/sertiML.png" alt="Certificate 3"></div>
+                    <div class="cert-item bg-pastel-pink"><img src="image/sertifDL.png" alt="Certificate 4"></div>
+                    <div class="cert-item bg-pastel-purple"><img src="image/softwareDev.png" alt="Certificate 5"></div>
 
                     <div class="cert-item cert-more-box bg-pastel-gray" id="btn-cert-more">
                         <h2 data-i18n="cert_all">ALL</h2>
@@ -283,24 +286,10 @@
                 </div>
                 <div class="modal-body cert-modal-scroll">
                     <div class="cert-grid-modal">
-                        <div class="cert-item"><img
-                                src="https://images.unsplash.com/photo-1523800503107-5bc3ba2a6f81?q=80&w=800&auto=format&fit=crop"
-                                alt="Cert 1"></div>
-                        <div class="cert-item"><img
-                                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop"
-                                alt="Cert 2"></div>
-                        <div class="cert-item"><img
-                                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop"
-                                alt="Cert 3"></div>
-                        <div class="cert-item"><img
-                                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop"
-                                alt="Cert 4"></div>
-                        <div class="cert-item"><img
-                                src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop"
-                                alt="Cert 5"></div>
-                        <div class="cert-item bg-pastel-yellow"><img
-                                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop"
-                                alt="Cert 6"></div>
+                        <div class="cert-item"><img src="image/pijak.png" alt="Cert 1"></div>
+                        <div class="cert-item"><img src="image/cloudGenAI.png" alt="Cert 2"></div>
+                        <div class="cert-item"><img src="image/javascript.png" alt="Cert 3"></div>
+                        <div class="cert-item"><img src="image/backendJS.png" alt="Cert 4"></div>
                     </div>
                 </div>
             </div>
@@ -328,19 +317,21 @@
                     </div>
                 </div>
                 <div class="contact-form-side" data-aos="fade-left">
-                    <form id="contact-form" class="brutalist-form">
+                    <form id="contact-form" class="brutalist-form" action="https://formspree.io/f/xaqkaqvw"
+                        method="POST">
                         <div class="form-group">
                             <label data-i18n="contact_label_name">FULL NAME</label>
-                            <input type="text" placeholder="YOUR NAME" data-i18n-placeholder="contact_ph_name" required>
+                            <input type="text" name="name" placeholder="YOUR NAME"
+                                data-i18n-placeholder="contact_ph_name" required>
                         </div>
                         <div class="form-group">
                             <label data-i18n="contact_label_email">EMAIL ADDRESS</label>
-                            <input type="email" placeholder="YOUR EMAIL" data-i18n-placeholder="contact_ph_email"
-                                required>
+                            <input type="email" name="email" placeholder="YOUR EMAIL"
+                                data-i18n-placeholder="contact_ph_email" required>
                         </div>
                         <div class="form-group">
                             <label data-i18n="contact_label_brief">THE BRIEF</label>
-                            <textarea rows="4" placeholder="WHAT'S ON YOUR MIND?"
+                            <textarea name="message" rows="4" placeholder="WHAT'S ON YOUR MIND?"
                                 data-i18n-placeholder="contact_ph_brief" required></textarea>
                         </div>
                         <button type="submit" class="btn primary-btn send-btn" data-i18n="contact_btn">SEND
