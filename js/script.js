@@ -368,7 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
             title: "SummaAI",
             images: ["image/summaai.png","image/summaai2.png","image/summaai3.png"], 
             desc: "Website cerdas dengan fitur meringkas isi dokumen secara otomatis serta mengekstrak poin tindakan penting untuk kebutuhan produktivitas.",
-            github: "https://github.com/m-fadil-faiz/summa-ai"
+            github: "https://github.com/mfadilfaiz17"
         }
     };
 
