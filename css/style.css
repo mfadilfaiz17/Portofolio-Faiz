@@ -86,16 +86,9 @@ h1 span, h2 span {
 }
 
 @keyframes glitch {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.7;
-        transform: skewX(5deg);
-    }
-    100% {
-        opacity: 1;
-    }
+    0% { opacity: 1; }
+    50% { opacity: 0.7; transform: skewX(5deg); }
+    100% { opacity: 1; }
 }
 
 /* ==========================================================================
@@ -169,7 +162,7 @@ nav ul a:hover {
 }
 
 /* ==========================================================================
-   TOMBOL DOWNLOAD CV DI NAVBAR
+   4. TOMBOL DOWNLOAD CV DI NAVBAR
    ========================================================================== */
 .nav-btn {
     display: inline-flex;
@@ -201,10 +194,8 @@ nav ul a:hover {
 }
 
 /* ==========================================================================
-   NEO-BRUTALISM ASYMMETRIC HERO TEXT (THICK & DENSER)
+   5. NEO-BRUTALISM ASYMMETRIC HERO TEXT (THICK & DENSER)
    ========================================================================== */
-
-/* Wrapper section quote — clip semua konten termasuk floating icons */
 .quote-section {
     position: relative;
     overflow: hidden;
@@ -232,7 +223,6 @@ nav ul a:hover {
     text-decoration: none !important;
 }
 
-/* Baris 1: BUILD WITH */
 .brutal-title .line-top {
     font-family: 'Archivo Black', sans-serif; 
     font-size: clamp(3rem, 8vw, 6.5rem);
@@ -241,52 +231,10 @@ nav ul a:hover {
     line-height: 0.9;
     text-transform: uppercase;
     z-index: 1;
+    white-space: nowrap;
+    text-align: center; 
 }
 
-/* Baris 2: Pembungkus Kotak Kuning */
-.brutal-title .line-middle-wrapper {
-    display: inline-block;
-    margin: -15px 0;
-    transform: rotate(-3deg); 
-    transition: transform 0.3s ease;
-    z-index: 2;
-}
-
-/* Kotak Kuning Tebal (Badge) */
-.brutal-title .brutal-badge {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(3rem, 9vw, 7rem); 
-    color: #ff33cc; 
-    background-color: #ffde59; 
-    padding: 5px 20px; 
-    border: 5px solid #000000;
-    transform: skewX(-10deg); 
-    display: inline-block;
-    box-shadow: 8px 8px 0px #000000;
-    line-height: 1;
-    text-transform: uppercase;
-    max-width: 95vw;
-}
-
-/* Baris 3: AUTOMATION (Teks Outline Biru) */
-.brutal-title .line-bottom {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(3.5rem, 10vw, 8rem);
-    color: #00e5ff; 
-    -webkit-text-stroke: 4px #000000;
-    text-shadow: 8px 8px 0px #000000;
-    letter-spacing: -2px;
-    line-height: 0.9;
-    text-transform: uppercase;
-    margin-top: -10px;
-    z-index: 1;
-    animation: brutalPulse 3s infinite ease-in-out;
-}
-
-/* ==========================================================================
-   ANIMASI INTERAKTIF
-   ========================================================================== */
-/* Baris 2: Pembungkus Kotak Kuning */
 .brutal-title .line-middle-wrapper {
     display: inline-block;
     margin: -10px 0; 
@@ -296,7 +244,22 @@ nav ul a:hover {
     z-index: 2;
 }
 
-/* Baris 3: AUTOMATION (Teks Outline Biru) */
+.brutal-title .brutal-badge {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 7rem); 
+    color: #ff33cc; 
+    background-color: #ffde59;
+    padding: 5px 30px; 
+    border: 5px solid #000000;
+    transform: skewX(-10deg); 
+    display: inline-block;
+    box-shadow: 8px 8px 0px #000000;
+    line-height: 1;
+    text-transform: uppercase;
+    max-width: 95vw;
+    white-space: nowrap; 
+}
+
 .brutal-title .line-bottom {
     font-family: 'Archivo Black', sans-serif;
     font-size: clamp(3.5rem, 10vw, 8rem); 
@@ -313,32 +276,16 @@ nav ul a:hover {
 }
 
 @keyframes brutalPulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.02) rotate(0.5deg);
-        text-shadow: 10px 10px 0px #000000;
-    }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02) rotate(0.5deg); text-shadow: 10px 10px 0px #000000; }
 }
 
-/* Responsivitas Layar HP */
-@media (max-width: 768px) {
-    .brutal-title .line-top { font-size: clamp(2.5rem, 10vw, 4rem); }
-    .brutal-title .line-middle-wrapper { margin: -5px 0; }
-    .brutal-title .brutal-badge { font-size: clamp(2.5rem, 11vw, 4.5rem); padding: 5px 20px; border-width: 4px; box-shadow: 6px 6px 0px #000; }
-    .brutal-title .line-bottom { font-size: clamp(3rem, 13vw, 5rem); margin-top: 5px; -webkit-text-stroke: 3px #000000; text-shadow: 6px 6px 0px #000000;}
-}
-
-/* ==========================================================================
-   SUB-QUOTE / DESKRIPSI BAWAH
-   ========================================================================== */
 .sub-quote {
     font-family: 'Space Grotesk', sans-serif; 
     font-size: clamp(1.2rem, 2.5vw, 2rem);
     font-weight: 700;
     color: #000000;
-    margin-top: 40px;
+    margin-top: 15px; 
     letter-spacing: 0.5px;
     opacity: 1;
     text-align: center;
@@ -347,14 +294,13 @@ nav ul a:hover {
 }
 
 /* ==========================================================================
-   FLOATING ICONS (3D BOLD NEO-BRUTALISM EFFECT)
+   6. FLOATING ICONS (3D BOLD NEO-BRUTALISM EFFECT)
    ========================================================================== */
 .floating-icons .f-icon {
     position: absolute;
     font-size: 4.5rem; 
     opacity: 1; 
     -webkit-text-stroke: 2px var(--border-color); 
-    
     text-shadow: 
         1px 1px 0 var(--border-color),
         2px 2px 0 var(--border-color),
@@ -364,37 +310,15 @@ nav ul a:hover {
         6px 6px 0 var(--border-color),
         7px 7px 0 var(--border-color),
         8px 8px 0 var(--border-color);
-        
     animation: float3D 6s ease-in-out infinite;
     z-index: 0;
 }
 
-/* Koordinat tetap menggunakan pengaturan aslimu */
-.fi-1 {
-    top: 22%;
-    left: 10%;
-    animation-delay: 0s;
-}
+.fi-1 { top: 22%; left: 10%; animation-delay: 0s; }
+.fi-2 { top: 68%; left: 14%; animation-delay: 1.5s; }
+.fi-3 { top: 18%; right: 10%; animation-delay: 3s; }
+.fi-4 { top: 62%; right: 15%; animation-delay: 4.5s; }
 
-.fi-2 {
-    top: 68%;
-    left: 14%;
-    animation-delay: 1.5s;
-}
-
-.fi-3 {
-    top: 18%;
-    right: 10%;
-    animation-delay: 3s;
-}
-
-.fi-4 {
-    top: 62%;
-    right: 15%;
-    animation-delay: 4.5s;
-}
-
-/* Animasi Baru dengan Pergerakan Bayangan (Depth/Kedalaman) */
 @keyframes float3D {
     0%, 100% {
         transform: translateY(0) rotate(0deg);
@@ -417,7 +341,7 @@ nav ul a:hover {
 }
 
 /* ==========================================================================
-   5. HERO SECTION & SOCIAL MEDIA BOX
+   7. HERO SECTION & SOCIAL MEDIA BOX
    ========================================================================== */
 .hero-section {
     padding-top: 150px;
@@ -457,17 +381,6 @@ nav ul a:hover {
     row-gap: 0;
 }
 
-@media (max-width: 768px) {
-    .greeting {
-        font-size: 36px;
-        min-height: 1.25em;
-        white-space: normal;
-    }
-    .greeting span {
-        white-space: normal;
-    }
-}
-
 .hero-socials {
     display: flex;
     gap: 15px;
@@ -502,7 +415,6 @@ nav ul a:hover {
     justify-content: flex-end;
 }
 
-/* PEMBUNGKUS FOTO: Tambahkan transition agar gerakannya halus */
 .image-wrapper {
     border: var(--border-width) solid var(--border-color);
     box-shadow: 10px 10px 0px var(--secondary-color);
@@ -513,14 +425,12 @@ nav ul a:hover {
     max-width: 100%;
 }
 
-/* EFEK HOVER PADA PEMBUNGKUS: Geser posisi & ubah bayangan */
 .image-wrapper:hover {
     transform: translate(-5px, -5px); 
     box-shadow: 15px 15px 0px var(--primary-color);
     border-color: var(--primary-color); 
 }
 
-/* FOTO ASLI: Tambahkan transition */
 .image-wrapper img {
     width: 100%;
     height: 420px;
@@ -529,14 +439,13 @@ nav ul a:hover {
     transition: filter 0.4s ease, transform 0.4s ease;
 }
 
-/* EFEK HOVER PADA FOTO: Menjadi Berwarna + Sedikit Zoom */
 .image-wrapper:hover img {
     filter: grayscale(0%) contrast(100%);
     transform: scale(1.05); 
 }
 
 /* ==========================================================================
-   6. INFINITE MARQUEE WITH DEVICON
+   8. INFINITE MARQUEE WITH DEVICON
    ========================================================================== */
 .marquee-wrapper {
     width: 100%;
@@ -568,16 +477,12 @@ nav ul a:hover {
 }
 
 @keyframes scrollMarquee {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 /* ==========================================================================
-   7. PROFILE SECTIONS (BENTO BOX NEO-BRUTALISM - 2 BOXES)
+   9. PROFILE SECTIONS (BENTO BOX NEO-BRUTALISM - 2 BOXES)
    ========================================================================== */
 #profile {
     background-color: #ffffff;
@@ -585,29 +490,24 @@ nav ul a:hover {
     width: 100%;
 }
 
-/* WADAH GRID BENTO */
 .about-bento-grid {
     display: grid;
-    grid-template-columns: 1fr; /* Default HP: 1 Kolom (akan ditimpa flex di media query bawah) */
+    grid-template-columns: 1fr; 
     gap: 20px;
     margin-top: 30px;
     width: 100%;
 }
 
-/* KOTAK-KOTAK BENTO */
 .bento-box {
     padding: 30px;
     border: var(--border-width) solid var(--border-color);
     box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-color);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     color: #000000;
-    
-    /* Memastikan isi teks proporsional jika tinggi kotak menyamakan sebelahnya */
     display: flex;
     flex-direction: column;
 }
 
-/* EFEK HOVER KOTAK */
 .bento-box:hover {
     transform: translate(-4px, -4px);
     box-shadow: calc(var(--shadow-offset) + 4px) calc(var(--shadow-offset) + 4px) 0px var(--border-color);
@@ -631,11 +531,9 @@ nav ul a:hover {
     margin: 0;
 }
 
-/* WARNA KOTAK (Kotak utama mengikuti warna aksen bawaan webmu) */
 .box-yellow { background-color: var(--accent-color); } 
 .box-blue { background-color: #38b6ff; }
 
-/* STYLE IKON FONT AWESOME BRUTALISM */
 .brutal-icon {
     background: #000000;
     color: #ffffff;
@@ -647,12 +545,8 @@ nav ul a:hover {
     font-size: 1.1rem;
 }
 
-/* =========================================
-   RESPONSIVE LAYOUT UNTUK TABLET & DESKTOP 
-   ========================================= */
 @media (min-width: 768px) {
     .about-bento-grid {
-        /* Tablet: 2 kotak sejajar seimbang dan tingginya sama rata */
         grid-template-columns: repeat(2, 1fr);
         align-items: stretch;
     }
@@ -660,13 +554,12 @@ nav ul a:hover {
 
 @media (min-width: 1024px) {
     .about-bento-grid {
-        /* PC: Kotak kiri lebih dominan (1.3) daripada kotak kanan (1) */
         grid-template-columns: 1.3fr 1fr; 
     }
 }
 
 /* ==========================================================================
-   8. PORTOFOLIO SECTION (NEO-BRUTALISM FIXED GRID)
+   10. PORTOFOLIO SECTION (NEO-BRUTALISM FIXED GRID)
    ========================================================================== */
 #portofolio {
     background-color: var(--bg-color);
@@ -677,7 +570,6 @@ nav ul a:hover {
     width: 100%;
 }
 
-/* TOMBOL FILTER */
 .portfolio-filters {
     display: flex;
     flex-wrap: wrap;
@@ -703,14 +595,12 @@ nav ul a:hover {
     transform: translate(-2px, -2px);
 }
 
-/* GRID LAYOUT UTAMA */
 .portfolio-grid-layout {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 25px;
 }
 
-/* KARTU PORTOFOLIO */
 .port-card {
     background: #ffffff;
     border: var(--border-width) solid var(--border-color);
@@ -728,7 +618,6 @@ nav ul a:hover {
     box-shadow: 10px 10px 0px var(--border-color) !important;
 }
 
-/* ANIMASI FILTER HALUS (ANTI-KAKU) */
 .port-card.show {
     animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
@@ -738,7 +627,6 @@ nav ul a:hover {
     100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* KUNCI UKURAN GAMBAR */
 .port-img {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -747,7 +635,6 @@ nav ul a:hover {
     display: block;
 }
 
-/* WADAH KONTEN TEKS */
 .port-content {
     padding: 20px;
     display: flex;
@@ -765,25 +652,10 @@ nav ul a:hover {
     color: #000000;
 }
 
-
-.port-card:nth-child(4n + 1) .port-tag {
-    background-color: #ffde59; 
-}
-
-
-.port-card:nth-child(4n + 2) .port-tag {
-    background-color: #ff33cc; 
-}
-
-
-.port-card:nth-child(4n + 3) .port-tag {
-    background-color: #00e5ff; 
-}
-
-
-.port-card:nth-child(4n + 4) .port-tag {
-    background-color: blueviolet;
-}
+.port-card:nth-child(4n + 1) .port-tag { background-color: #ffde59; }
+.port-card:nth-child(4n + 2) .port-tag { background-color: #ff33cc; }
+.port-card:nth-child(4n + 3) .port-tag { background-color: #00e5ff; }
+.port-card:nth-child(4n + 4) .port-tag { background-color: blueviolet; }
 
 .port-content h3 {
     font-size: 1.25rem;
@@ -801,7 +673,6 @@ nav ul a:hover {
     color: var(--text-color);
 }
 
-/* TOMBOL GITHUB MODAL */
 .github-brutal-btn {
     display: inline-block;
     margin-top: 15px;
@@ -829,7 +700,7 @@ nav ul a:hover {
 }
 
 /* ==========================================================================
-   9. CERTIFICATES SECTION (SHARP NEO-BRUTALISM & SMOOTH BLUR MODAL)
+   11. CERTIFICATES SECTION (SHARP NEO-BRUTALISM & SMOOTH BLUR MODAL)
    ========================================================================== */
 #certificates {
     background-color: var(--bg-color);
@@ -844,7 +715,6 @@ nav ul a:hover {
     margin-top: 40px;
 }
 
-/* Kotak Sertifikat Siku-Siku Tajam */
 .cert-item {
     border: var(--border-width) solid var(--border-color);
     box-shadow: 6px 6px 0px var(--border-color);
@@ -876,7 +746,6 @@ nav ul a:hover {
     transform: scale(1.05);
 }
 
-/* WARNA PASTEL KHUSUS KOTAK SERTIFIKAT */
 .bg-pastel-yellow { background-color: #fceea7; }
 .bg-pastel-blue   { background-color: #bce6f0; }
 .bg-pastel-green  { background-color: #c9e4ca; }
@@ -884,7 +753,6 @@ nav ul a:hover {
 .bg-pastel-purple { background-color: #e2d5e5; }
 .bg-pastel-gray   { background-color: #e9ecef; }
 
-/* TOMBOL SEE MORE (ALL VIEW GALLERY) */
 .cert-more-box h2 {
     font-size: 3rem;
     font-weight: 800;
@@ -902,11 +770,6 @@ nav ul a:hover {
     font-size: 1.5rem;
 }
 
-/* ==========================================
-   EFEK TAB MODAL BACKGROUND BLUR & ANIMASI SMOOTH
-   ========================================== */
-
-/* 1. Kondisi Awal Modal (Sembunyi tapi siap dianimasikan) */
 #cert-modal {
     position: fixed;
     top: 0; left: 0;
@@ -926,7 +789,6 @@ nav ul a:hover {
     background: rgba(0, 0, 0, 0.4) !important; 
 }
 
-/* 2. Kondisi Awal Kotak Pop-up (Turun & Transparan) */
 .sharp-modal {
     background: #ffffff;
     border: var(--border-width) solid var(--border-color);
@@ -937,13 +799,11 @@ nav ul a:hover {
     max-height: 85vh;
     display: flex;
     flex-direction: column;
-    
     transform: scale(0.95) translateY(40px);
     opacity: 0;
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
 }
 
-/* 3. KONDISI AKTIF (Saat tombol ALL ditekan) */
 #cert-modal.active {
     opacity: 1;
     visibility: visible;
@@ -954,7 +814,6 @@ nav ul a:hover {
     opacity: 1;
 }
 
-/* Isi Dalam Modal */
 .modal-header {
     background: var(--primary-color);
     padding: 15px 20px;
@@ -990,9 +849,6 @@ nav ul a:hover {
     gap: 20px;
 }
 
-/* ==========================================
-   RESPONSIVITAS MOBILE
-   ========================================== */
 @media (max-width: 768px) {
     .cert-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -1007,7 +863,7 @@ nav ul a:hover {
 }
 
 /* ==========================================================================
-   10. CONTACT SECTION (DUA KOLOM)
+   12. CONTACT SECTION (DUA KOLOM)
    ========================================================================== */
 .contact-section {
     background-color: var(--bg-color);
@@ -1135,14 +991,10 @@ nav ul a:hover {
     box-shadow: 0px 0px 0px #000000;
 }
 
-/* ==========================================
-   TOMBOL WHATSAPP NEO-BRUTALISM
-   ========================================== */
 .wa-tile {
     transition: all 0.2s ease;
 }
 
-/* Berubah jadi hijau khas WhatsApp saat disentuh */
 .wa-tile:hover {
     background-color: #25D366 !important; 
     color: #ffffff !important;
@@ -1152,7 +1004,7 @@ nav ul a:hover {
 }
 
 /* ==========================================================================
-   11. FOOTER UTUH
+   13. FOOTER UTUH
    ========================================================================== */
 .main-footer {
     padding: 40px 0;
@@ -1202,10 +1054,8 @@ nav ul a:hover {
 }
 
 /* ==========================================================================
-   12. POP-UP DETAIL PROJECT MODAL & SLIDER (CLEAN CODE)
+   14. POP-UP DETAIL PROJECT MODAL & SLIDER
    ========================================================================== */
-
-/* 1. BACKGROUND OVERLAY UTAMA */
 .modal-brutal {
     position: fixed;
     top: 0; 
@@ -1225,14 +1075,12 @@ nav ul a:hover {
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* Menyembunyikan modal */
 .modal-brutal.hidden {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
 }
 
-/* 2. KOTAK KONTEN MODAL */
 .modal-brutal .modal-content {
     background: #ffffff;
     width: 90%;
@@ -1247,12 +1095,10 @@ nav ul a:hover {
     transition: transform 0.3s ease;
 }
 
-/* Tambahan: Kotak sedikit mengecil saat disembunyikan agar efeknya mulus */
 .modal-brutal.hidden .modal-content {
     transform: scale(0.9);
 }
 
-/* 3. TOMBOL SILANG (X) UTAMA */
 .modal-close {
     position: absolute;
     top: 15px; 
@@ -1270,13 +1116,12 @@ nav ul a:hover {
 }
 
 .modal-close:hover {
-    background-color: var(--accent-color, #ff33cc); 
+    background: var(--accent-color, #ff33cc); 
     color: #ffffff;
     transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0px #000000;
 }
 
-/* 4. BINGKAI SLIDER GAMBAR (DIKUNCI MATI ANTI LOMPAT) */
 .modal-slider {
     position: relative;
     display: flex;
@@ -1291,7 +1136,6 @@ nav ul a:hover {
     z-index: 5;
 }
 
-/* 5. FOTO DI DALAM BINGKAI */
 #modal-image {
     width: 100%;
     height: 100%;
@@ -1300,7 +1144,6 @@ nav ul a:hover {
     z-index: 6;
 }
 
-/* 6. TOMBOL PANAH KIRI KANAN (NEO-BRUTALISM) */
 .slider-btn {
     position: absolute;
     top: 50%;
@@ -1336,7 +1179,6 @@ nav ul a:hover {
 #slider-prev { left: 10px; }
 #slider-next { right: 10px; }
 
-/* 7. INDIKATOR HALAMAN (1 / 4) */
 #modal-slider-counter {
     text-align: center;
     display: block;
@@ -1348,7 +1190,6 @@ nav ul a:hover {
     margin: 10px 0 15px 0;
 }
 
-/* 8. BAGIAN DESKRIPSI TEKS */
 #modal-desc {
     display: flex;
     flex-direction: column;
@@ -1357,7 +1198,7 @@ nav ul a:hover {
 }
 
 /* ==========================================================================
-   13. ZORA AGENT CHATBOT UI - FINAL PERFECT VISUAL FIX
+   15. ZORA AGENT CHATBOT UI
    ========================================================================== */
 #zora-wrapper {
     position: fixed;
@@ -1403,7 +1244,6 @@ nav ul a:hover {
     transform: translateX(-50%) scale(1); 
 }
 
-/* FIX HEADER OREN: Memaksa warna kembalis dan menata tombol silang ke kanan */
 .zora-header {
     background-color: blueviolet !important;
     color: #ffffff !important;
@@ -1422,7 +1262,6 @@ nav ul a:hover {
     margin: 0;
 }
 
-/* FIX TOMBOL SILANG DI KANAN */
 #zora-close {
     background: none !important;
     border: none !important;
@@ -1439,7 +1278,6 @@ nav ul a:hover {
     color: var(--accent-color) !important;
 }
 
-/* AREA BODI CHAT */
 .zora-body {
     flex: 1;                   
     overflow-y: auto;          
@@ -1450,7 +1288,6 @@ nav ul a:hover {
     background: #f9f9f9;
 }
 
-/* MODEL GELEMBUNG CHAT */
 .chat-msg {
     padding: 10px 16px;
     border: 2px solid var(--border-color);
@@ -1480,7 +1317,6 @@ nav ul a:hover {
     padding: 12px 12px 6px 12px;
     background: #ffffff;
     scrollbar-width: none;      
-    
     -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
     mask-image: linear-gradient(to right, black 85%, transparent 100%);
 }
@@ -1489,7 +1325,6 @@ nav ul a:hover {
     display: none;              
 }
 
-/* PERBAIKAN TOMBOL KAPSUL: Menambahkan animasi shadow tipis khas brutalist saat di-hover */
 .suggestion-chip {
     flex: 0 0 auto;             
     background: #ffffff;
@@ -1509,7 +1344,6 @@ nav ul a:hover {
     box-shadow: 2px 2px 0px var(--border-color);
 }
 
-/* Biarkan area .zora-footer tetap mempertahankan border-top miliknya */
 .zora-footer {
     display: flex;
     border-top: var(--border-width) solid var(--border-color);
@@ -1543,7 +1377,6 @@ nav ul a:hover {
     color: #ffffff;
 }
 
-/* ANIMASI LOADING */
 .loading-msg {
     display: inline-flex;
     align-items: center;
@@ -1571,7 +1404,7 @@ nav ul a:hover {
 }
 
 /* ==========================================================================
-   14. MEDIA QUERIES RESPONSIVITAS ALL DEVICE
+   16. MEDIA QUERIES RESPONSIVITAS ALL DEVICE
    ========================================================================== */
 @media (max-width: 992px) {
     .hero-content {
@@ -1606,55 +1439,109 @@ nav ul a:hover {
         font-size: 14vw;
     }
 
-    /* ---- Hamburger Navbar ---- */
-    .menu-toggle {
-        display: block;
+    .logo-icon {
+        order: 1; 
+        flex-shrink: 0;
     }
+
     .main-header {
         border-radius: 20px;
-        padding: 15px 20px;
-        flex-wrap: wrap;
+        padding: 10px 15px; 
+        justify-content: flex-start; 
+        gap: 8px; 
+        max-width: 100%; 
+        overflow: hidden;
     }
-    #nav-menu, 
+    
     #nav-action {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        margin-top: 0; 
+        width: auto; 
+        order: 2; 
+        margin-left: auto;
+    }
+
+    .lang-switch-container {
+        margin: 0 !important;
+        transform: scale(0.85); 
+        transform-origin: center;
+        flex-shrink: 0 !important;
+    }
+    
+    .menu-toggle {
+        display: block;
+        padding: 5px 8px; 
+        font-size: 1.1rem;
+        order: 3; 
+        flex-shrink: 0 !important;
+    }
+
+    .nav-btn {
+        width: 65px !important;
+        height: 32px !important;
+        padding: 0 !important;
+        box-shadow: 2px 2px 0px #000000 !important;
+        flex-shrink: 0 !important; 
+        font-size: 0 !important;
+        color: transparent !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .nav-btn::before {
+        content: "CV";
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 800;
+        color: #000000 !important;
+    }
+
+    .nav-btn::after {
+        content: "\f019"; 
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 0.85rem;
+        margin-left: 5px;
+        color: #000000 !important;
+    }
+
+    #nav-menu {
         display: none;
         width: 100%;
         margin-top: 15px;
+        order: 4; 
     }
-    .main-header.open #nav-menu, 
-    .main-header.open #nav-action {
+    
+    .main-header.open {
+        flex-wrap: wrap; 
+    }
+    
+    .main-header.open #nav-menu {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
+    
     nav ul {
         flex-direction: column;
         width: 100%;
-        gap: 8px;
+        gap: 5px;
         text-align: center;
     }
+    
     nav ul li a {
         display: block;
         padding: 8px;
     }
-    .nav-btn {
-        width: 100%;
-        text-align: center;
-    }
-    /* Lang switch di dalam nav-action saat mobile - pastikan tetap kelihatan */
-    .nav-action {
-        gap: 10px;
-    }
-    .lang-switch-container {
-        margin-bottom: 5px !important;
-    }
 
-    /* ---- Headings ---- */
     h1 { font-size: 2.2rem; }
     h2 { font-size: 1.8rem; }
     h3 { font-size: 1.3rem; }
 
-    /* ---- About Bento ---- */
     .about-bento-grid {
         display: flex;
         flex-direction: column;
@@ -1664,7 +1551,6 @@ nav ul a:hover {
     .bento-box {
         width: 100%;
         padding: 20px;
-        /* Kurangi shadow agar tidak bocor ke kanan di mobile */
         box-shadow: 4px 4px 0px var(--border-color);
     }
     .bento-box:hover {
@@ -1683,7 +1569,6 @@ nav ul a:hover {
         margin-right: 10px;
     }
 
-    /* ---- Floating icons: kecilkan di mobile, jangan hilangkan ---- */
     .floating-icons .f-icon {
         font-size: 2.5rem;
         -webkit-text-stroke: 1px var(--border-color);
@@ -1693,23 +1578,25 @@ nav ul a:hover {
             3px 3px 0 var(--border-color),
             4px 4px 0 var(--border-color);
     }
-    /* Posisikan ulang agar tidak menyentuh tepi viewport */
     .fi-1 { top: 15%; left: 2%; }
     .fi-2 { top: 70%; left: 2%; }
     .fi-3 { top: 15%; right: 2%; }
     .fi-4 { top: 70%; right: 2%; }
 
-    /* ---- brutal-badge: kurangi shadow di mobile ---- */
-    .brutal-title .brutal-badge {
-        box-shadow: 4px 4px 0px #000;
+    .brutal-title .line-top {
+        font-size: clamp(2rem, 8.5vw, 4rem);
     }
 
-    /* ---- line-bottom text-shadow di mobile ---- */
+    .brutal-title .brutal-badge {
+        box-shadow: 4px 4px 0px #000;
+        font-size: clamp(1.8rem, 8vw, 3.5rem); 
+        padding: 5px 25px; 
+    }
+
     .brutal-title .line-bottom {
         text-shadow: 4px 4px 0px #000000;
     }
 
-    /* ---- image-wrapper: kurangi shadow di mobile ---- */
     .image-wrapper {
         box-shadow: 6px 6px 0px var(--secondary-color);
     }
@@ -1717,7 +1604,6 @@ nav ul a:hover {
         box-shadow: 8px 8px 0px var(--primary-color);
     }
 
-    /* ---- Portfolio: 2 kolom di HP ---- */
     .portfolio-grid-layout {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
@@ -1726,7 +1612,6 @@ nav ul a:hover {
         grid-template-columns: repeat(2, 1fr);
     }
     .port-card {
-        /* Kurangi shadow agar tidak bocor ke kanan */
         box-shadow: 4px 4px 0px var(--border-color);
     }
     .port-card:hover {
@@ -1747,13 +1632,11 @@ nav ul a:hover {
         overflow: hidden;
     }
 
-    /* ---- Certificates ---- */
     .cert-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
     .cert-item {
-        /* Kurangi shadow agar tidak bocor ke kanan */
         box-shadow: 4px 4px 0px var(--border-color);
     }
     .cert-item:hover {
@@ -1765,7 +1648,6 @@ nav ul a:hover {
         grid-template-columns: 1fr;
     }
 
-    /* ---- Contact: 1 kolom, form kompak ---- */
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -1797,25 +1679,21 @@ nav ul a:hover {
         max-height: 160px;
     }
 
-    /* ---- Slider ---- */
     .slider-image-wrapper {
         height: 220px;
     }
-    /* Modal slider di mobile: pakai aspect-ratio agar gambar proporsional, tidak gepeng */
     .modal-slider {
         height: auto;
         aspect-ratio: 16 / 9;
         min-height: 180px;
     }
 
-    /* ---- Zora chatbot ---- */
     #zora-chatbot {
         width: 290px;
         bottom: 90px;
         right: 20px;
     }
 
-    /* ---- Footer ---- */
     .footer-content {
         flex-direction: column;
         gap: 15px;
@@ -1839,13 +1717,11 @@ nav ul a:hover {
         font-size: 3rem;
     }
 
-    /* Modal slider: ganti fixed height ke aspect-ratio di HP kecil agar gambar tidak gepeng */
     .modal-slider {
         height: auto;
         aspect-ratio: 16 / 9;
     }
 
-    /* Modal content lebih kompak di HP kecil */
     .modal-brutal .modal-content {
         padding: 15px;
         width: 95%;
@@ -1853,7 +1729,7 @@ nav ul a:hover {
 }
 
 /* ==========================================================================
-   15. EFEK KURSOR PENGETIKAN
+   17. EFEK KURSOR PENGETIKAN
    ========================================================================== */
 #typing-text::after {
     content: '|';
@@ -1862,26 +1738,23 @@ nav ul a:hover {
     font-weight: 800;
     margin-left: 2px;
     animation: blink 0.8s infinite;
-    
-    /* Tambahan agar posisi kursor tetap sejajar dengan teks */
     vertical-align: baseline; 
 }
 
-/* Animasi kedip asli milikmu */
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
 
-/* Penyesuaian kursor saat di mode HP asli milikmu */
 @media (max-width: 768px) {
     #typing-text::after {
         font-size: 36px; 
     }
 }
-/* ==========================================
-   16. NEO-BRUTALISM SLIDING LANGUAGE SWITCH
-   ========================================== */
+
+/* ==========================================================================
+   18. NEO-BRUTALISM SLIDING LANGUAGE SWITCH
+   ========================================================================== */
 .lang-switch-container {
     position: relative;
     display: flex;
@@ -1898,13 +1771,11 @@ nav ul a:hover {
     transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-/* Efek saat tombol ditekan mouse */
 .lang-switch-container:active {
     transform: translate(2px, 2px);
     box-shadow: 1px 1px 0px #000000;
 }
 
-/* Balok warna di dalam yang bisa bergeser */
 .lang-switch-bg {
     position: absolute;
     top: 2px;
@@ -1917,13 +1788,11 @@ nav ul a:hover {
     z-index: 1;
 }
 
-/* KETIKA BAHASA INDONESIA AKTIF (DI-SWITCH KE KANAN) */
 .lang-switch-container.active-id .lang-switch-bg {
     left: 41px;
     background-color: #00e5ff;
 }
 
-/* Teks Label EN dan ID */
 .lang-label {
     flex: 1;
     text-align: center;
@@ -1948,28 +1817,13 @@ nav ul a:hover {
     margin-bottom: 0 !important;
 }
 
-/* ==========================================
-   WARNA TEKS DUA NADA (TWO-TONE HEADINGS)
-   ========================================== */
-
-span[data-i18n="about_title_1"] { 
-    color: #ff4500; 
-}
-span[data-i18n="about_title_2"] { 
-    color: #000000;
-}
-span[data-i18n="cert_title_1"] { 
-    color: #000000; 
-}
-span[data-i18n="cert_title_2"] { 
-    color: #ff4500; 
-}
-span[data-i18n="contact_title_1"] { 
-    color: #000000; 
-}
-span[data-i18n="contact_title_2"] { 
-    color: #000000; 
-}
-span[data-i18n="contact_title_3"] { 
-    color: #ff4500;
-}
+/* ==========================================================================
+   19. WARNA TEKS DUA NADA (TWO-TONE HEADINGS)
+   ========================================================================== */
+span[data-i18n="about_title_1"] { color: #ff4500; }
+span[data-i18n="about_title_2"] { color: #000000; }
+span[data-i18n="cert_title_1"] { color: #000000; }
+span[data-i18n="cert_title_2"] { color: #ff4500; }
+span[data-i18n="contact_title_1"] { color: #000000; }
+span[data-i18n="contact_title_2"] { color: #000000; }
+span[data-i18n="contact_title_3"] { color: #ff4500; }
