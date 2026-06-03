@@ -1594,7 +1594,9 @@ nav ul a:hover {
     }
 
     .brutal-title .line-bottom {
+        font-size: clamp(1.8rem, 11vw, 4rem); 
         text-shadow: 4px 4px 0px #000000;
+        -webkit-text-stroke: 2px #000000; 
     }
 
     .image-wrapper {
