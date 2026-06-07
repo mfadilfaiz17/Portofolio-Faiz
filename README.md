@@ -32,7 +32,7 @@ The project is structured using vanilla web technologies without any heavy frame
 
 1. Since this is a static website, you don't need to install any dependencies or run a complex local server:
 
-2. Clone this repository: git clone https://github.com/m-fadil-faiz/your-repo-name.git
+2. Clone this repository: git clone https://github.com/mfadilfaiz17/Portofolio-Faiz
 
 3. Open the folder in your code editor.
 
