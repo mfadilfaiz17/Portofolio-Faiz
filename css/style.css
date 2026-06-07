@@ -485,7 +485,7 @@ nav ul a:hover {
    9. PROFILE SECTIONS (BENTO BOX NEO-BRUTALISM - 2 BOXES)
    ========================================================================== */
 #profile {
-    background-color: #ffffff;
+    background-color: var(--bg-color);
     overflow: hidden;
     width: 100%;
 }
@@ -1303,7 +1303,7 @@ nav ul a:hover {
 }
 
 .chat-msg.user {
-    background: #ffffff;
+    background: var(--primary-color);
     align-self: flex-end;
     border-radius: 18px 18px 4px 18px;
     box-shadow: 3px 3px 0px var(--border-color);
@@ -1829,3 +1829,325 @@ span[data-i18n="cert_title_2"] { color: #ff4500; }
 span[data-i18n="contact_title_1"] { color: #000000; }
 span[data-i18n="contact_title_2"] { color: #000000; }
 span[data-i18n="contact_title_3"] { color: #ff4500; }
+
+/* ==========================================================================
+   20. DARK MODE (NEO-BRUTALISM) - PENYESUAIAN WARNA FINAL
+   ========================================================================== */
+body.dark-mode {
+    --bg-color: #121212; 
+    --border-color: #e0e0e0; 
+    --text-color: #ffffff; 
+    --primary-color: #ff784e; 
+}
+
+/* Ubah background kotak-kotak terang menjadi gelap */
+body.dark-mode .main-header,
+body.dark-mode .port-card,
+body.dark-mode .cert-item,
+body.dark-mode .social-tile,
+body.dark-mode .brutalist-form,
+body.dark-mode .modal-content,
+body.dark-mode .zora-body,
+body.dark-mode .zora-footer,
+body.dark-mode .zora-suggestions,
+body.dark-mode .suggestion-chip,
+body.dark-mode .marquee-wrapper,
+body.dark-mode .marquee-item,
+body.dark-mode .main-footer,
+body.dark-mode .hero-socials .social-btn,
+body.dark-mode .image-wrapper,
+body.dark-mode .filter-btn,
+body.dark-mode .sharp-close,
+body.dark-mode .modal-slider,
+body.dark-mode .slider-btn,
+body.dark-mode .lang-switch-container {
+    background-color: #1e1e1e; 
+    color: var(--text-color);
+}
+
+/* Kotak input form */
+body.dark-mode .form-group input, 
+body.dark-mode .form-group textarea,
+body.dark-mode .zora-footer input {
+    background-color: #242424;
+    color: #ffffff;
+    border-color: var(--border-color);
+}
+
+body.dark-mode .form-group input:focus, 
+body.dark-mode .form-group textarea:focus {
+    background-color: #333333;
+    border-color: var(--primary-color);
+}
+
+/* FIX: Teks pada elemen ber-background warna cerah harus tetap hitam */
+body.dark-mode .nav-btn,
+body.dark-mode .nav-btn::before,
+body.dark-mode .nav-btn::after,
+body.dark-mode .menu-toggle,
+body.dark-mode .lang-label,
+body.dark-mode .brutal-badge,
+body.dark-mode .designer-role,
+body.dark-mode .port-tag,
+body.dark-mode .github-brutal-btn,
+body.dark-mode .send-btn,
+body.dark-mode .zora-header h3,
+body.dark-mode .box-yellow,
+body.dark-mode .box-blue,
+body.dark-mode .chat-msg.bot,
+body.dark-mode .bg-pastel-yellow,
+body.dark-mode .bg-pastel-blue,
+body.dark-mode .bg-pastel-green,
+body.dark-mode .bg-pastel-pink,
+body.dark-mode .bg-pastel-purple,
+body.dark-mode .bg-pastel-gray {
+    color: #000000 !important;
+}
+
+/* FIX: Heading dan teks tanpa background terang harus jadi putih di Dark Mode */
+body.dark-mode .brutal-title .line-top,
+body.dark-mode .sub-quote,
+body.dark-mode .contact-title,
+body.dark-mode .cert-more-box h2,
+body.dark-mode #modal-slider-counter,
+body.dark-mode span[data-i18n="about_title_2"],
+body.dark-mode span[data-i18n="cert_title_1"],
+body.dark-mode span[data-i18n="contact_title_1"],
+body.dark-mode span[data-i18n="contact_title_2"] {
+    color: var(--text-color) !important;
+}
+
+/* FIX: Warna Oranye (Two-tone) pada judul */
+body.dark-mode span[data-i18n="about_title_1"],
+body.dark-mode span[data-i18n="cert_title_2"],
+body.dark-mode span[data-i18n="contact_title_3"] {
+    color: var(--primary-color) !important;
+}
+
+/* Ikon Brutalism inverted */
+body.dark-mode .brutal-icon {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+}
+
+/* FIX: Garis tepi (Stroke) dan teks bayangan menjadi warna kontras */
+body.dark-mode .brutal-title .line-bottom {
+    -webkit-text-stroke: 4px var(--border-color);
+    text-shadow: 8px 8px 0px var(--border-color);
+}
+
+body.dark-mode .floating-icons .f-icon {
+    -webkit-text-stroke: 2px var(--border-color); 
+    text-shadow: 
+        1px 1px 0 var(--border-color), 2px 2px 0 var(--border-color),
+        3px 3px 0 var(--border-color), 4px 4px 0 var(--border-color),
+        5px 5px 0 var(--border-color), 6px 6px 0 var(--border-color),
+        7px 7px 0 var(--border-color), 8px 8px 0 var(--border-color);
+}
+
+/* FIX: Mengubah Border kotak menjadi putih terang */
+body.dark-mode .nav-btn,
+body.dark-mode .brutal-title .brutal-badge,
+body.dark-mode .image-wrapper,
+body.dark-mode .bento-box,
+body.dark-mode .brutalist-form,
+body.dark-mode .modal-brutal .modal-content,
+body.dark-mode .slider-btn,
+body.dark-mode .github-brutal-btn,
+body.dark-mode .send-btn,
+body.dark-mode #zora-trigger,
+body.dark-mode #zora-chatbot,
+body.dark-mode .lang-switch-container,
+body.dark-mode .lang-switch-bg,
+body.dark-mode .social-btn,
+body.dark-mode .marquee-item,
+body.dark-mode .filter-btn:hover, 
+body.dark-mode .filter-btn.active,
+body.dark-mode .port-card,
+body.dark-mode .cert-item,
+body.dark-mode .sharp-modal,
+body.dark-mode .social-tile,
+body.dark-mode .modal-close {
+    border-color: var(--border-color);
+}
+
+/* FIX: Memetakan ulang Bayangan (Box-Shadow) menjadi putih tanpa menyentuh ukurannya */
+body.dark-mode .main-header { box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-color); }
+body.dark-mode .menu-toggle { box-shadow: 3px 3px 0px var(--border-color); }
+body.dark-mode .nav-btn { box-shadow: 3px 3px 0px var(--border-color); }
+body.dark-mode .nav-btn:hover { box-shadow: 5px 5px 0px var(--border-color); }
+body.dark-mode .brutal-title .brutal-badge { box-shadow: 8px 8px 0px var(--border-color); }
+body.dark-mode .social-btn { box-shadow: 3px 3px 0px var(--border-color); }
+body.dark-mode .social-btn:hover { box-shadow: 5px 5px 0px var(--border-color); }
+body.dark-mode .image-wrapper { box-shadow: 10px 10px 0px var(--secondary-color); }
+body.dark-mode .image-wrapper:hover { box-shadow: 15px 15px 0px var(--primary-color); border-color: var(--primary-color); }
+body.dark-mode .marquee-item { box-shadow: 3px 3px 0px var(--border-color); }
+body.dark-mode .bento-box { box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-color); }
+body.dark-mode .bento-box:hover { box-shadow: calc(var(--shadow-offset) + 4px) calc(var(--shadow-offset) + 4px) 0px var(--border-color); }
+body.dark-mode .filter-btn:hover, body.dark-mode .filter-btn.active { box-shadow: 4px 4px 0px var(--border-color); }
+body.dark-mode .port-card { box-shadow: 6px 6px 0px var(--border-color); }
+body.dark-mode .port-card:hover { box-shadow: 10px 10px 0px var(--border-color) !important; }
+body.dark-mode .github-brutal-btn { box-shadow: 4px 4px 0px var(--border-color); }
+body.dark-mode .github-brutal-btn:hover { box-shadow: 6px 6px 0px var(--border-color); }
+body.dark-mode .cert-item { box-shadow: 6px 6px 0px var(--border-color); }
+body.dark-mode .cert-item:hover { box-shadow: 10px 10px 0px var(--border-color); }
+body.dark-mode .sharp-modal { box-shadow: 15px 15px 0px var(--border-color); }
+body.dark-mode .social-tile { box-shadow: 4px 4px 0px var(--border-color); }
+body.dark-mode .social-tile:hover { box-shadow: 7px 7px 0px var(--border-color); }
+body.dark-mode .brutalist-form { box-shadow: 12px 12px 0px var(--border-color); }
+body.dark-mode .send-btn { box-shadow: 3px 3px 0px var(--border-color); }
+body.dark-mode .send-btn:hover { box-shadow: 5px 5px 0px var(--border-color); }
+body.dark-mode .modal-content { box-shadow: 12px 12px 0px var(--border-color); }
+body.dark-mode .modal-close { box-shadow: 4px 4px 0px var(--border-color); }
+body.dark-mode .modal-close:hover { box-shadow: 6px 6px 0px var(--border-color); }
+body.dark-mode .slider-btn { box-shadow: 4px 4px 0px var(--border-color); }
+body.dark-mode .slider-btn:hover { box-shadow: 6px 6px 0px var(--border-color); }
+body.dark-mode #zora-trigger { box-shadow: 4px 4px 0px var(--border-color); }
+body.dark-mode #zora-chatbot { box-shadow: 8px 8px 0px var(--border-color); }
+body.dark-mode .chat-msg.user { box-shadow: 3px 3px 0px var(--border-color); }
+body.dark-mode .suggestion-chip:hover { box-shadow: 2px 2px 0px var(--border-color); border-color: var(--border-color); }
+body.dark-mode .lang-switch-container { box-shadow: 3px 3px 0px var(--border-color); }
+
+/* Tombol Toggle Dark Mode Mengambang di Kiri Bawah */
+#theme-toggle {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; 
+    z-index: 10000;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #000000;
+    border: 3px solid var(--border-color);
+    box-shadow: 4px 4px 0px var(--border-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+#theme-toggle:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 7px 7px 0px var(--border-color);
+    background-color: var(--accent-color);
+}
+
+body.dark-mode #theme-toggle {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Responsivitas Dark Mode untuk HP (Ukuran tetap presisi!) */
+@media (max-width: 768px) {
+    body.dark-mode .brutal-title .line-bottom {
+        -webkit-text-stroke: 2px var(--border-color);
+        text-shadow: 4px 4px 0px var(--border-color);
+    }
+    body.dark-mode .brutal-title .brutal-badge {
+        box-shadow: 4px 4px 0px var(--border-color);
+    }
+    body.dark-mode .nav-btn {
+        box-shadow: 2px 2px 0px var(--border-color) !important;
+    }
+    body.dark-mode .bento-box,
+    body.dark-mode .port-card,
+    body.dark-mode .cert-item {
+        box-shadow: 4px 4px 0px var(--border-color);
+    }
+    body.dark-mode .bento-box:hover,
+    body.dark-mode .port-card:hover,
+    body.dark-mode .cert-item:hover {
+        box-shadow: 6px 6px 0px var(--border-color) !important;
+    }
+    body.dark-mode .brutalist-form {
+        box-shadow: 6px 6px 0px var(--border-color);
+    }
+    #theme-toggle {
+        bottom: 20px;
+        left: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+}
+
+/* ==========================================================================
+   FIX: MENGEMBALIKAN EFEK HOVER WARNA-WARNI DI MODE GELAP
+   ========================================================================== */
+
+body.dark-mode .hero-socials .social-btn:hover,
+body.dark-mode .social-tile:not(.wa-tile):hover {
+    background-color: var(--accent-color) !important;
+    color: #000000 !important;
+}
+
+body.dark-mode .github-brutal-btn:hover {
+    background-color: #00e5ff !important;
+    color: #000000 !important;
+}
+
+body.dark-mode .footer-socials a:hover {
+    color: var(--primary-color) !important;
+}
+
+body.dark-mode .footer-links a:hover {
+    color: var(--primary-color) !important;
+}
+
+body.dark-mode .nav-btn:hover,
+body.dark-mode .send-btn:hover {
+    background-color: var(--accent-color) !important;
+    color: #000000 !important;
+}
+
+body.dark-mode .filter-btn.active, 
+body.dark-mode .filter-btn:hover {
+    background-color: var(--primary-color) !important;
+    color: #000000 !important;
+}
+
+/* ==========================================================================
+   FIX: KONTRAS WARNA TEKS TOMBOL BAHASA (EN / ID) DI MODE GELAP
+   ========================================================================== */
+
+body.dark-mode .lang-label {
+    color: #ffffff !important;
+}
+
+body.dark-mode .lang-switch-container:not(.active-id) .lang-label:nth-child(2),
+body.dark-mode .lang-switch-container:not(.active-id) .lang-label:first-of-type {
+    color: #000000 !important;
+}
+
+body.dark-mode .lang-switch-container.active-id .lang-label:nth-child(3),
+body.dark-mode .lang-switch-container.active-id .lang-label:last-of-type {
+    color: #000000 !important;
+}
+
+/* ==========================================================================
+   FIX: DARK MODE ICON & TEXT IMPROVEMENTS
+   ========================================================================== */
+
+body.dark-mode .brutal-badge {
+    color: #ff33cc !important;
+}
+
+body.dark-mode .floating-icons .f-icon {
+    text-shadow: 
+        2px 2px 0px #ffde59, 
+        4px 4px 0px #00e5ff;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+}
+
+body.dark-mode .floating-icons .f-icon {
+    opacity: 0.9;
+}
+
+body.dark-mode .sub-quote {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}

@@ -752,4 +752,29 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    /* ==========================================================================
+       DARK MODE TOGGLE LOGIC
+       ========================================================================== */
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        const themeIcon = themeToggle.querySelector('i');
+
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode'); 
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('dark-mode', 'enabled'); 
+                themeIcon.classList.replace('fa-moon', 'fa-sun'); 
+            } else {
+                localStorage.setItem('dark-mode', 'disabled'); 
+                themeIcon.classList.replace('fa-sun', 'fa-moon'); 
+            }
+        });
+    }
+
 });
