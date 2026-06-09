@@ -8,12 +8,22 @@ A striking, interactive personal portfolio website built with a bold **Neo-Bruta
 
 🔗 **Live Demo:** [https://zoraaa1st.netlify.app]
 
-## ✨ Key Features
-- **Neo-Brutalism UI:** High contrast, sharp edges, and striking bold typography.
-- **Interactive Zora Chatbot:** A custom-built floating agent interface.
-- **Multi-Language Support:** Seamlessly toggle between English (EN) and Bahasa Indonesia (ID) using a custom slide switch.
-- **Dynamic Project Gallery:** Categorized grid layout for AI, Backend, and IoT projects with a smooth pop-up slider.
-- **Fully Responsive:** Optimized for desktop, tablet, and mobile viewing.
+## ✨ Unique Features
+
+### 🎨 **Neo-Brutalism Design Aesthetic**
+Bold, high-contrast visual design with sharp edges, striking typography, and minimal-yet-impactful layouts—a distinctive departure from traditional portfolio designs.
+
+### 💬 **Interactive Zora Chatbot**
+Custom-built floating chatbot agent (Zora) providing real-time assistance and engagement—a unique interactive element that sets this portfolio apart.
+
+### ⌨️ **Animated Typing Hero Section**
+Continuous cycling typing effect showcasing multiple role descriptions ("Faiz.", "AI Enthusiast.", "Exploring Tech Enterprise.") with smooth character-by-character animation for dynamic first impression.
+
+### ⚡ **Branded Pre-loader Animation**
+Custom-branded pre-loader displaying "WHO IS ZORAAA?!?" with smooth transitions—creating a memorable and personality-driven loading experience.
+
+### 🌐 **Dual-Language with Slide Switch**
+Seamless bilingual support (English & Bahasa Indonesia) with an elegant custom slide switch component—enabling dynamic language switching with persistent preferences.
 
 ## 📂 Project Structure
 
