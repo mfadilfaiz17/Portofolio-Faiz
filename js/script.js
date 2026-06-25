@@ -91,13 +91,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ==========================================
-    // 3. FITUR FORM SUBMIT CONTACT
+    // 3. FITUR FORM SUBMIT CONTACT (Pakai Form Spree)
     // ==========================================
     /*const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            alert("Pesan berhasil dikirim! Faiz akan segera membalasnya.");
+            alert("Pesan berhasil dikirim! Thank uuu.");
             contactForm.reset();
         });
     }*/
@@ -132,8 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function startDrag(e) {
         if (e.type === 'mousedown' && e.button !== 0) return;
         if (e.target.closest('#zora-close') || e.target.closest('#zora-input') || e.target.closest('#zora-send') || e.target.closest('.zora-suggestions')) return;
-
-        // Hanya preventDefault untuk mouse, BUKAN touch agar click tetap jalan di mobile
         if (e.type === 'mousedown') e.preventDefault();
 
         isDragging = true;
@@ -166,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
             hasMoved = true;
         }
 
-        if (!hasMoved) return; // Jangan gerakkan sebelum threshold
+        if (!hasMoved) return;
 
         let newLeft = initialLeft + deltaX;
         let newTop = initialTop + deltaY;
@@ -301,7 +299,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
             zoraLoading.classList.add('hidden');
-            // Zora sekarang menjawab berdasarkan bahasa yang aktif di website
             addMessage('bot', translations[currentLang][replyKey]);
         }, 1500);
     }
@@ -346,7 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
             desc: "Mengembangkan model AI arsitektur CNN dengan 32 neuron konvolusi. Sistem ini digunakan untuk mengklasifikasikan penyakit ginjal berdasarkan citra hasil CT Scan dengan tingkat akurasi tinggi.",
             github: "https://github.com/mfadilfaiz17"
         },
-        "designsportfo": { 
+        "design-sportfo": { 
             title: "SportFo",
             images: ["image/sportFo.png","image/sportFo2.png","image/sportFo3.png","image/sportFo4.png"], 
             desc: "Sebuah aplikasi ramah pengguna booking arena olahraga yang ada disekitarmu. Praktis, simpel dan mudah digunakan dari rumahmu.",
@@ -369,6 +366,11 @@ document.addEventListener("DOMContentLoaded", () => {
             images: ["image/summaai.png","image/summaai2.png","image/summaai3.png"], 
             desc: "Website cerdas dengan fitur meringkas isi dokumen secara otomatis serta mengekstrak poin tindakan penting untuk kebutuhan produktivitas.",
             github: "https://github.com/mfadilfaiz17"
+        },
+        "summaai-launching": { 
+            title: "Grapic Design Launching Web",
+            images: ["image/summaaiLaunching.png"], 
+            desc: "Desain Grafis tentang rilisnya sebuah website peringkas dengan teknologi AI yang ringan dan cepat",
         }
     };
 
@@ -387,28 +389,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 portCards.forEach(card => {
                     if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                        // 1. Tampilkan kotak
                         card.style.display = 'flex';
                         card.style.pointerEvents = 'auto';
-                        
-                        // 2. KEMBALIKAN ATRIBUT AOS (Ini yang membuat animasi scroll bisa berulang)
                         card.setAttribute('data-aos', 'fade-up');
                         
-                        // 3. Bersihkan sisa style paksaan agar AOS bebas bekerja
                         card.style.opacity = '';
                         card.style.transform = '';
                     } else {
-                        // 1. Sembunyikan kotak
                         card.style.display = 'none';
                         card.style.pointerEvents = 'none';
-                        
-                        // 2. Cabut AOS untuk kotak yang hilang agar kalkulasi tinggi halaman tidak error
                         card.removeAttribute('data-aos');
                     }
                 });
 
-                // 4. REFRESH AOS: Memaksa AOS menghitung ulang kotak yang baru muncul 
-                // Sehingga efek animasi 'fade-up' akan terpicu secara otomatis dengan smooth!
                 setTimeout(() => {
                     if (typeof AOS !== 'undefined') {
                         AOS.refresh();
@@ -567,7 +560,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ==========================================
+ // ==========================================
     // 7. LOGIKA GANTI BAHASA LENGKAP (EN / ID)
     // ==========================================
     const translations = {
@@ -597,6 +590,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "port_4_title": "JDM Car Sell", "port_4_desc": "Building an automotive system for buying and selling Japanese Domestic Market (JDM) cars.",
             "port_5_title": "Web Matrix Calculator", "port_5_desc": "Creating an interactive matrix calculation system built into a calculator interface.",
             "port_6_title": "SummaAI", "port_6_desc": "A smart website with an automatic document summarization and action item extraction system.",
+            "port_7_title": "SummaAI Launching", "port_7_desc": "Graphic design announcing the launch of a lightweight, fast AI-powered summarization website.",
             "modal_github": "View on GitHub",
             
             // Certificates
@@ -620,19 +614,21 @@ document.addEventListener("DOMContentLoaded", () => {
             "zora_sug_4": "Faiz's hobbies?", "zora_sug_5": "Download ATS CV?",
             "zora_ph": "Type a question...",
 
-            // Modal Portfolio Details (Dari projectsData)
+            // Modal Portfolio Details (FIXED KEYS)
             "modal_ai_tool_title": "Roblox Web Sentiment Analysis",
             "modal_ai_tool_desc": "Building a Natural Language Processing (NLP) model to automatically analyze the sentiment of Roblox app reviews on Google Playstore.",
             "modal_cnn_medis_title": "Kidney Disease Classification (CNN)",
             "modal_cnn_medis_desc": "Developing an AI CNN architecture model with 32 convolution neurons. This system is used to classify kidney diseases based on CT Scan images with high accuracy.",
-            "modal_designsportfo_title": "SportFo",
-            "modal_designsportfo_desc": "A user-friendly application for booking sports arenas near you. Practical, simple, and easy to use from your home.",
+            "modal_design_sportfo_title": "SportFo",
+            "modal_design_sportfo_desc": "A user-friendly application for booking sports arenas near you. Practical, simple, and easy to use from your home.",
             "modal_jdm_car_title": "JDM Car Sell",
             "modal_jdm_car_desc": "Building an automotive system for managing the buying and selling of Japanese Domestic Market (JDM) cars like Nissan Silvia S15, Skyline R34, and Mazda RX-7.",
             "modal_kalkulator_matrix_title": "The Matrix",
             "modal_kalkulator_matrix_desc": "Creating an interactive web system interface to perform complex linear algebra matrix calculations easily and quickly.",
             "modal_summa_ai_title": "SummaAI",
             "modal_summa_ai_desc": "A smart website featuring automatic document summarization and extraction of important action items for productivity needs.",
+            "modal_summaai_launching_title": "Graphic Design Launching Web",
+            "modal_summaai_launching_desc": "Graphic design for the launch of a lightweight, fast AI-based summarization website.",
 
             // Zora Bot Replies Dynamic
             "zora_reply_default": "Sorry, Zora hasn't been trained for that question yet. Please contact Faiz via the 'Contact' form.",
@@ -668,6 +664,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "port_4_title": "Jual Beli Mobil JDM", "port_4_desc": "Membangun sistem otomotif jual beli mobil Japanese Domestic Market (JDM).",
             "port_5_title": "Kalkulator Matriks Web", "port_5_desc": "Membuat sistem perhitungan matriks yang diintegrasikan pada antarmuka kalkulator.",
             "port_6_title": "SummaAI", "port_6_desc": "Website cerdas dengan sistem peringkas isi dokumen secara otomatis serta penarikan poin tindakan.",
+            "port_7_title": "Perilisan SummaAI", "port_7_desc": "Desain grafis untuk perilisan situs web peringkasan berbasis AI yang ringan dan cepat.",
             "modal_github": "Lihat di GitHub",
             
             // Certificates
@@ -691,19 +688,21 @@ document.addEventListener("DOMContentLoaded", () => {
             "zora_sug_4": "Hobi Faiz?", "zora_sug_5": "Unduh CV ATS?",
             "zora_ph": "Ketik pertanyaan...",
 
-            // Modal Portfolio Details (Dari projectsData)
+            // Modal Portfolio Details (FIXED KEYS)
             "modal_ai_tool_title": "Analisis Sentimen Roblox Web",
             "modal_ai_tool_desc": "Membangun model Natural Language Processing (NLP) untuk menganalisis sentimen dari ulasan aplikasi Roblox di Google Playstore secara otomatis.",
             "modal_cnn_medis_title": "Klasifikasi Penyakit Ginjal (CNN)",
             "modal_cnn_medis_desc": "Mengembangkan model AI arsitektur CNN dengan 32 neuron konvolusi. Sistem ini digunakan untuk mengklasifikasikan penyakit ginjal berdasarkan citra hasil CT Scan dengan tingkat akurasi tinggi.",
-            "modal_designsportfo_title": "SportFo",
-            "modal_designsportfo_desc": "Sebuah aplikasi ramah pengguna booking arena olahraga yang ada disekitarmu. Praktis, simpel dan mudah digunakan dari rumahmu.",
+            "modal_design_sportfo_title": "SportFo",
+            "modal_design_sportfo_desc": "Sebuah aplikasi ramah pengguna booking arena olahraga yang ada disekitarmu. Praktis, simpel dan mudah digunakan dari rumahmu.",
             "modal_jdm_car_title": "JDM Car Sell",
             "modal_jdm_car_desc": "Membangun sistem otomotif untuk manajemen jual beli mobil Japanese Domestic Market (JDM) seperti Nissan Silvia S15, Skyline R34, dan Mazda RX-7.",
             "modal_kalkulator_matrix_title": "The Matrix",
             "modal_kalkulator_matrix_desc": "Membuat antarmuka sistem web interaktif untuk melakukan operasi perhitungan matriks aljabar linear yang kompleks dengan mudah dan cepat.",
             "modal_summa_ai_title": "SummaAI",
             "modal_summa_ai_desc": "Website cerdas dengan fitur meringkas isi dokumen secara otomatis serta mengekstrak poin tindakan penting untuk kebutuhan produktivitas.",
+            "modal_summaai_launching_title": "Desain Grafis untuk Perilisan Website",
+            "modal_summaai_launching_desc": "Desain grafis untuk peluncuran website peringkas berbasis AI yang ringan dan cepat.",
 
             // Zora Bot Replies Dynamic
             "zora_reply_default": "Maaf, Zora belum dilatih untuk pertanyaan itu. Silakan hubungi Faiz lewat form 'Contact'.",
