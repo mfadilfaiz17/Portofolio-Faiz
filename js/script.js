@@ -374,27 +374,36 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // 2. LOGIKA TOMBOL FILTER (TERINTEGRASI PENUH DENGAN AOS SCROLL)
+    // 2. LOGIKA TOMBOL FILTER (INTEGRASI AOS SCROLL DAN DENGAN BATASAN MAKSIMAL 6 ITEM UNTUK "ALL")
     const filterBtns = document.querySelectorAll('.filter-btn');
     const portCards = document.querySelectorAll('.port-card');
 
     if (filterBtns.length > 0) {
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Ubah warna tombol aktif
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
                 const filterValue = btn.getAttribute('data-filter');
 
+                let visibleCount = 0;
+
                 portCards.forEach(card => {
-                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                        card.style.display = 'flex';
-                        card.style.pointerEvents = 'auto';
-                        card.setAttribute('data-aos', 'fade-up');
-                        
-                        card.style.opacity = '';
-                        card.style.transform = '';
+                    const cardCategory = card.getAttribute('data-category');
+                    const isMatch = (filterValue === 'all' || cardCategory === filterValue);
+
+                    if (isMatch) {
+                        if (filterValue === 'all' && visibleCount >= 6) {
+                            card.style.display = 'none';
+                            card.style.pointerEvents = 'none';
+                            card.removeAttribute('data-aos');
+                        } else {
+                            card.style.display = 'flex';
+                            card.style.pointerEvents = 'auto';
+                            card.setAttribute('data-aos', 'fade-up');
+                            card.style.opacity = '';
+                            card.style.transform = '';
+                            visibleCount++; 
+                        }
                     } else {
                         card.style.display = 'none';
                         card.style.pointerEvents = 'none';
@@ -409,6 +418,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 }, 50);
             });
         });
+        
+        const btnAll = document.querySelector('.filter-btn[data-filter="all"]');
+        if (btnAll) {
+            btnAll.click();
+        }
     }
 
     // 3. LOGIKA POPUP MODAL & SLIDER
@@ -436,17 +450,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     sliderCounter.textContent = `${currentImageIndex + 1} / ${currentImages.length}`;
                 }
 
-                // KONTROL OTOMATIS PANAH MENTOK (Sembunyikan panah yang tidak diperlukan)
                 if (currentImages.length <= 1) {
                     if (slideNext) slideNext.style.display = 'none';
                     if (slidePrev) slidePrev.style.display = 'none';
                 } else {
                     if (slidePrev) {
-                        // Jika di foto pertama (0), sembunyikan panah kiri. Jika tidak, munculkan.
                         slidePrev.style.display = (currentImageIndex === 0) ? 'none' : 'flex';
                     }
                     if (slideNext) {
-                        // Jika di foto terakhir, sembunyikan panah kanan. Jika tidak, munculkan.
                         slideNext.style.display = (currentImageIndex === currentImages.length - 1) ? 'none' : 'flex';
                     }
                 }
@@ -459,7 +470,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = projectsData[projectId];
 
                 if (data) {
-                    // Menyuntikkan data-i18n secara dinamis agar modal bisa ganti bahasa kapan saja
                     if (modalTitle) {
                         const titleKey = `modal_${projectId.replace(/-/g, '_')}_title`;
                         modalTitle.setAttribute('data-i18n', titleKey);
@@ -482,7 +492,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     }
                 } else {
-                    // Fallback aman jika data tidak ada
                     if (modalTitle) {
                         modalTitle.removeAttribute('data-i18n');
                         modalTitle.textContent = card.querySelector('h3').textContent;
