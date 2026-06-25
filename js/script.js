@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo(0, 0);
 
     // ==========================================
-    // EFEK PENGETIKAN (TYPING EFFECT) BERULANG
+    // 0.EFEK PENGETIKAN (TYPING EFFECT) BERULANG
     // ==========================================
     const typingText = document.getElementById("typing-text");
     const words = ["Faiz.", "AI Enthusiast.", "Exploring Tech Enterprise."]; 
@@ -58,17 +58,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Menunggu seluruh elemen web dimuat terlebih dahulu
     window.addEventListener('load', () => {
         setTimeout(() => {
-            // Animasi mengangkat layer hitam ke atas
             loader.style.transform = 'translateY(-100%)';
             
-            // Inisialisasi AOS (Animasi Scroll) setelah pre-loader hilang
             AOS.init({
                 duration: 1000,
                 once: false,
                 mirror: true,
                 offset: 100
             });
-        }, 2000); // Tampil selama 2 detik
+        }, 2000);
     });
 
     // ==========================================
@@ -77,12 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuToggle = document.getElementById('menu-toggle');
     const mainHeader = document.getElementById('main-header');
 
-    // Kita hanya perlu menambah/menghapus class 'open', sisanya diatur oleh CSS
     menuToggle.addEventListener('click', () => {
         mainHeader.classList.toggle('open');
     });
 
-    // Otomatis menutup menu saat link navigasi di-klik di mode HP
     const navLinks = document.querySelectorAll('#nav-menu a');
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -91,16 +87,62 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ==========================================
-    // 3. FITUR FORM SUBMIT CONTACT (Pakai Form Spree)
+    // 3. FITUR FORM SUBMIT CONTACT (Formspree AJAX)
     // ==========================================
-    /*const contactForm = document.getElementById('contact-form');
+    const contactForm = document.getElementById('contact-form');
+    
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            alert("Pesan berhasil dikirim! Thank uuu.");
-            contactForm.reset();
+            
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            
+            // 1. Ubah teks tombol menjadi "Loading" saat sedang memproses
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+            submitBtn.disabled = true;
+            
+            const formData = new FormData(contactForm);
+            
+            try {
+                // 2. Kirim data secara diam-diam (background)
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // 3. JIKA BERHASIL: BERSIHKAN FORM (RESET)
+                    contactForm.reset(); 
+                    
+                    // Ubah tombol jadi warna hijau jika sukses
+                    submitBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
+                    submitBtn.style.backgroundColor = '#4CAF50'; 
+                    submitBtn.style.color = '#fff';
+                    
+                    // Tombol kembali ke semula
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.style.backgroundColor = ''; 
+                        submitBtn.style.color = '';
+                        submitBtn.disabled = false;
+                    }, 3000);
+                    
+                } else {
+                    alert("Oops! Ada masalah saat mengirim pesan.");
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                }
+            } catch (error) {
+                alert("Oops! Gagal mengirim. Cek koneksi internetmu.");
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            }
         });
-    }*/
+    }
 
     // ==========================================
     // 4. ZORA AGENT CHATBOT LOGIC
